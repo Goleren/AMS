@@ -1,86 +1,94 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMS - Công Cụ Giải Toán Tự Động</title>
+    <title>AMS - Advanced Math Solver</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- HEADER BAR: Thanh điều hướng nằm trên cùng -->
+    <!-- HEADER BAR: Navigation bar at the very top -->
     <header class="navbar">
         <div class="navbar-left">
             <button id="btnVersions" class="nav-button">AMS 1.0</button>
         </div>
         <div class="navbar-right">
-            <button id="btnInstructions" class="nav-button">Hướng dẫn</button>
+            <button id="btnInstructions" class="nav-button">Instructions</button>
         </div>
     </header>
 
-    <!-- CONTENT WRAPPER: Để đẩy nội dung xuống dưới header -->
+    <!-- CONTENT WRAPPER: To push the main content below the fixed header -->
     <div class="content-wrapper">
         <div class="container">
-            <h1>Chào mừng đến với AMS - Automated Math Solver</h1>
-            <p>Nhập phép tính hoặc phương trình của bạn vào ô dưới đây và nhấn "Giải Ngay" để nhận kết quả cùng hướng dẫn chi tiết.</p>
+            <h1>Welcome to AMS - Automated Math Solver</h1>
+            <p>Enter your math expression or equation below and click "Solve Now" to get the result and detailed explanation.</p>
             
             <div class="input-section">
-                <input type="text" id="mathExpressionInput" placeholder="Ví dụ: 2 * (3 + 4) / 2 hoặc x^2 - 4 = 0">
-                <button id="solveButton">Giải Ngay</button>
+                <input type="text" id="mathExpressionInput" placeholder="Example: 2 * (3 + 4) / 2 or x**2 - 4 = 0">
+                <button id="solveButton">Solve Now</button>
             </div>
             
             <div id="resultsSection" class="hidden">
-                <h2>Kết Quả:</h2>
+                <h2>Results:</h2>
                 <p id="resultText" class="result-display"></p>
                 
-                <h3>Hướng Dẫn và Chú Thích:</h3>
+                <h3>Explanation:</h3>
                 <pre id="explanationText" class="explanation-display"></pre>
             </div>
         </div>
     </div>
 
-    <!-- VERSIONS SECTION (Ban đầu ẩn) -->
+    <!-- VERSIONS SECTION (Initially hidden as an overlay/modal) -->
     <div id="versionsSection" class="overlay hidden">
         <div class="overlay-content">
             <span class="close-button" id="closeVersions">&times;</span>
-            <h2>Các phiên bản của AMS</h2>
+            <h2>AMS Versions</h2>
             <ul>
-                <li><strong>AMS 1.0 (Hiện tại):</strong> Phiên bản cơ bản với các phép toán số học và giải phương trình đại số đơn giản.</li>
-                <li><strong>AMS 2.0 (Sắp ra mắt):</strong> Kế hoạch bổ sung đạo hàm, tích phân.</li>
-                <li><strong>AMS 3.0 (Tương lai):</strong> Kế hoạch tích hợp giải hệ phương trình và bất phương trình.</li>
+                <li><strong>AMS 1.0 (Current):</strong> Basic arithmetic operations and simple algebraic equation solving.</li>
+                <li><strong>AMS 2.0 (Coming Soon):</strong> Planned features include derivatives and integrals.</li>
+                <li><strong>AMS 3.0 (Future):</strong> Planned integration of system of equations and inequalities solving.</li>
             </ul>
+            <p>Stay tuned for updates!</p>
         </div>
     </div>
 
-    <!-- INSTRUCTIONS SECTION (Ban đầu ẩn) -->
+    <!-- INSTRUCTIONS SECTION (Initially hidden as an overlay/modal) -->
     <div id="instructionsSection" class="overlay hidden">
         <div class="overlay-content">
             <span class="close-button" id="closeInstructions">&times;</span>
-            <h2>Hướng dẫn sử dụng AMS</h2>
-            <p>Chào mừng bạn đến với hướng dẫn sử dụng AMS!</p>
-            <h3>1. Nhập phép tính:</h3>
-            <p>Bạn có thể nhập các phép tính số học cơ bản như: <code>1 + 2 * 3</code>, <code>(10 - 5) / 2</code>.</p>
-            <p>Đối với lũy thừa, sử dụng <code>**</code> (ví dụ: <code>x**2</code> cho $x^2$).</p>
-            <h3>2. Nhập phương trình:</h3>
-            <p>Để giải phương trình, hãy nhập phương trình với biến <code>x</code>. Ví dụ:</p>
+            <h2>How to Use AMS</h2>
+            <p>Welcome to the AMS user guide!</p>
+            <h3>1. Entering Expressions:</h3>
+            <p>You can enter basic arithmetic expressions like: <code>1 + 2 * 3</code>, <code>(10 - 5) / 2</code>.</p>
+            <p>For exponents, use <code>**</code> (e.g., <code>x**2</code> for $x^2$).</p>
+            <h3>2. Entering Equations:</h3>
+            <p>To solve equations, enter the equation with variable <code>x</code>. For example:</p>
             <ul>
                 <li><code>x + 5 = 10</code></li>
                 <li><code>2*x - 7 = 3*x + 1</code></li>
                 <li><code>x**2 - 4 = 0</code></li>
-                <li><code>sin(x) = 0</code> (hỗ trợ một số hàm lượng giác cơ bản)</li>
+                <li><code>sin(x) = 0</code> (supports some basic trigonometric functions)</li>
             </ul>
-            <h3>3. Xem kết quả:</h3>
-            <p>Sau khi nhấn "Giải Ngay", kết quả và hướng dẫn chi tiết sẽ xuất hiện bên dưới.</p>
-            <p><em>Mã nguồn cho các phiên bản (ví dụ):</em></p>
-            <pre><code>// Phiên bản 1.0 (script.js) có thể trông như sau:
-// (Đây chỉ là ví dụ mã giả, không phải mã thực tế bạn sẽ chỉnh sửa ở đây)
-// const response = await fetch('your_backend_api_url/solve', {...});
+            <h3>3. Viewing Results:</h3>
+            <p>After clicking "Solve Now", the result and a detailed explanation will appear below.</p>
+            <p><em>Coding for each version:</em></p>
+            <pre><code>// AMS 1.0 (script.js) logic example (for illustration purposes, not actual editable code):
+// const response = await fetch('your_backend_api_url/solve', {
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({ expression: expression })
+// });
 // const data = await response.json();
 // if (data.success) { /* display results */ } else { /* display error */ }
 
-// Phiên bản 2.0 sẽ có thêm logic xử lý đạo hàm/tích phân
-// (Backend sẽ cần được cập nhật để xử lý các phép toán mới)
+// AMS 2.0 (future) would involve updating the Python backend (app.py)
+// to handle derivative and integral calculations using SymPy's advanced features.
+// The frontend (script.js) might need minor updates to send specific request types
+// if you introduce different types of solvers (e.g., /solve/derivative).
+
+// AMS 3.0 (future) would expand the backend further for systems of equations.
 </code></pre>
-            <p>Chúng tôi sẽ tiếp tục cập nhật hướng dẫn cho các phiên bản sắp tới.</p>
+            <p>We will continue to update this guide for upcoming versions.</p>
         </div>
     </div>
 
