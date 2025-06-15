@@ -4,27 +4,27 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #e0f2f7;
     display: flex;
-    flex-direction: column; /* Allows stacking header and content vertically */
+    flex-direction: column; /* Cho phép xếp header và content theo cột */
     min-height: 100vh;
     margin: 0;
-    padding: 0; /* Remove old padding from body */
+    padding: 0; /* Bỏ padding cũ ở body */
     box-sizing: border-box;
 }
 
 /* HEADER BAR STYLES */
 .navbar {
-    background-color: #333; /* Dark background */
+    background-color: #333; /* Nền tối */
     color: white;
     padding: 10px 20px;
     display: flex;
-    justify-content: space-between; /* Push buttons to ends */
+    justify-content: space-between; /* Đẩy các nút ra hai bên */
     align-items: center;
     width: 100%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
-    position: sticky; /* Keeps navbar at the top when scrolling */
+    position: sticky; /* Giữ navbar ở trên cùng khi cuộn */
     top: 0;
-    z-index: 1000; /* Ensure it's above other content */
+    z-index: 1000; /* Đảm bảo nó nằm trên các nội dung khác */
 }
 
 .navbar-left, .navbar-right {
@@ -33,7 +33,7 @@ body {
 }
 
 .nav-button {
-    background-color: #007bff; /* Blue button color */
+    background-color: #007bff; /* Màu xanh của nút */
     color: white;
     padding: 8px 15px;
     border: none;
@@ -42,7 +42,7 @@ body {
     font-size: 1em;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin: 0 5px; /* Spacing between buttons if more than one */
+    margin: 0 5px; /* Khoảng cách giữa các nút nếu có nhiều hơn 1 */
 }
 
 .nav-button:hover {
@@ -50,19 +50,19 @@ body {
     transform: translateY(-1px);
 }
 
-/* MAIN CONTENT WRAPPER: To create spacing below the navbar */
+/* MAIN CONTENT WRAPPER: Để tạo khoảng trống bên dưới navbar */
 .content-wrapper {
-    flex-grow: 1; /* Allows it to expand and take remaining space */
+    flex-grow: 1; /* Cho phép nó mở rộng để chiếm không gian còn lại */
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 40px 20px; /* Padding for the main content area */
+    padding: 40px 20px; /* Padding cho nội dung chính */
     box-sizing: border-box;
-    margin-top: 20px; /* Add some space below the navbar */
+    margin-top: 20px; /* Thêm khoảng trống dưới navbar */
 }
 
 
-/* MAIN CONTAINER STYLES (Kept similar or slightly updated) */
+/* MAIN CONTAINER STYLES (Giữ nguyên hoặc cập nhật nhẹ) */
 .container {
     background-color: #ffffff;
     padding: 35px 45px;
@@ -162,33 +162,33 @@ button:hover {
     background-color: #f8f9fa;
     padding: 20px;
     border-radius: 8px;
-    white-space: pre-wrap; /* Preserve whitespace and line breaks */
-    word-wrap: break-word; /* Break long words */
+    white-space: pre-wrap;
+    word-wrap: break-word;
     font-family: 'Consolas', 'Courier New', monospace;
     font-size: 0.95em;
     color: #444;
     border: 1px solid #e2e6ea;
 }
 
-/* OVERLAY/MODAL STYLES (for Versions and Instructions sections) */
+/* OVERLAY/MODAL STYLES */
 .overlay {
-    position: fixed; /* Fixed position on screen */
+    position: fixed; /* Giữ vị trí cố định trên màn hình */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Dimmed background */
+    background-color: rgba(0, 0, 0, 0.7); /* Nền đen mờ */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; /* Ensure it's above all other content */
-    opacity: 0; /* Initially transparent */
-    visibility: hidden; /* Initially completely hidden */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition effect */
+    z-index: 2000; /* Đảm bảo nó nằm trên tất cả các nội dung khác */
+    opacity: 0; /* Ban đầu trong suốt */
+    visibility: hidden; /* Ban đầu ẩn hoàn toàn */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
 }
 
-.overlay.visible { /* When 'visible' class is added */
-    opacity: 1; /* Show */
+.overlay.visible { /* Khi có class 'visible' */
+    opacity: 1; /* Hiển thị */
     visibility: visible;
 }
 
@@ -197,42 +197,12 @@ button:hover {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    max-width: 80%; /* Limit width */
-    max-height: 80%; /* Limit height */
-    overflow-y: auto; /* Allow scrolling if content is too long */
-    position: relative; /* For close-button positioning */
-    text-align: left; /* Align content within overlay */
+    max-width: 80%; /* Giới hạn chiều rộng */
+    max-height: 80%; /* Giới hạn chiều cao */
+    overflow-y: auto; /* Cho phép cuộn nếu nội dung quá dài */
+    position: relative; /* Để close-button có thể căn chỉnh tương đối */
+    text-align: left; /* Căn chỉnh nội dung trong overlay */
 }
-
-.overlay-content h2, .overlay-content h3 {
-    color: #007bff;
-    margin-bottom: 15px;
-}
-
-.overlay-content ul {
-    list-style-type: disc;
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
-
-.overlay-content li {
-    margin-bottom: 8px;
-    line-height: 1.5;
-}
-
-.overlay-content pre {
-    background-color: #f0f0f0;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto; /* Allow horizontal scrolling for wide code blocks */
-    font-size: 0.85em;
-    color: #333;
-}
-
-.overlay-content code {
-    font-family: 'Consolas', 'Courier New', monospace;
-}
-
 
 .close-button {
     position: absolute;
@@ -249,24 +219,13 @@ button:hover {
     color: #333;
 }
 
-/* Hidden class for initial state */
+/* Ẩn các phần tử */
 .hidden {
     display: none;
 }
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        padding: 10px;
-    }
-    .nav-button {
-        width: calc(100% - 10px); /* Adjust button width */
-        margin-bottom: 5px;
-    }
-    .navbar-right {
-        width: 100%;
-    }
     .container {
         padding: 25px 20px;
         box-shadow: none;
@@ -292,7 +251,7 @@ button:hover {
     }
 
     .overlay-content {
-        max-width: 95%; /* Wider on mobile */
+        max-width: 95%; /* Rộng hơn trên di động */
         padding: 20px;
     }
 }
