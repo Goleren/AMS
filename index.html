@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMS - Advance math solving</title>
+    
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to AMS 1.0</h1>
+        <p>Type in and equation:</p>
+        <input type="text" id="mathExpressionInput" placeholder="For example:2+1-1">
+        <button id="solveButton">Click this button to solve</button>
+
+        <div id="resultsSection" class="hidden">
+            <h2>Results:</h2>
+            <p id="resultText"></p>
+            <h3>Instructions:</h3>
+            <pre id="explanationText"></pre>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
