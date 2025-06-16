@@ -1,10 +1,10 @@
 # app.py
 from flask import Flask, request, jsonify
 from sympy import sympify, solve, Eq, Symbol
-from flask_cors import CORS # Make sure you have installed: pip install Flask sympy flask-cors
+from flask_cors import CORS 
 
 app = Flask(__name__)
-CORS(app) # Enable Cross-Origin Resource Sharing for frontend to call API
+CORS(app) 
 
 @app.route('/solve', methods=['POST'])
 def solve_math():
@@ -19,9 +19,8 @@ def solve_math():
         }), 400
 
     try:
-        # Try to solve as a basic arithmetic or symbolic expression
         expr = sympify(expression)
-        result = expr.evalf() # evalf() to get a numerical value
+        result = expr.evalf() 
 
         explanation = f"Result of the calculation: {expression} = {result}\n\n"
         explanation += "This is a basic arithmetic operation performed."
@@ -33,18 +32,15 @@ def solve_math():
         })
 
     except (SyntaxError, TypeError, ValueError) as e:
-        # If not a basic arithmetic expression, try solving as an equation
         try:
             x = Symbol('x')
             
-            # Determine if it's an equation (contains '=')
             if '=' in expression:
                 parts = expression.split('=')
                 lhs_str = parts[0].strip()
                 rhs_str = parts[1].strip()
                 equation = Eq(sympify(lhs_str, locals={'x': x}), sympify(rhs_str, locals={'x': x}))
             else:
-                # If no '=', assume solving for expression = 0
                 equation = Eq(sympify(expression, locals={'x': x}), 0)
 
             solutions = solve(equation, x)
@@ -65,14 +61,12 @@ def solve_math():
             })
 
         except Exception as e_eq:
-            # If it fails to solve as an equation as well
             return jsonify({
                 "success": False,
                 "message": "Could not solve this expression/equation.",
                 "explanation": f"Error parsing equation: {e_eq}\nPlease try entering basic arithmetic or an equation in the format 'x + 5 = 10' or 'x**2 - 4 = 0'."
             }), 400
     except Exception as e:
-        # Catch any other unexpected errors
         return jsonify({
             "success": False,
             "message": "An unexpected error occurred.",
@@ -80,4 +74,4 @@ def solve_math():
         }), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000) # Ensure it runs on port 5000
+    app.run(debug=True, port=5000) 

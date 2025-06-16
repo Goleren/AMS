@@ -75,10 +75,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            // !!! IMPORTANT: CHANGE THIS URL TO YOUR DEPLOYED BACKEND URL FOR PUBLIC ACCESS !!!
-            // Currently, it points to your local machine (127.0.0.1:5000).
-            // Example of a deployed URL: 'https://your-ams-backend.onrender.com/solve'
-            const backendApiUrl = 'http://127.0.0.1:5000/solve'; 
+            // !!! ĐÂY LÀ DÒNG CẦN THAY ĐỔI ĐỂ KẾT NỐI VỚI BACKEND CÔNG KHAI !!!
+            // Khi bạn triển khai Backend Python lên một dịch vụ hosting (như Render),
+            // bạn sẽ nhận được một URL CÔNG KHAI.
+            // Ví dụ về URL đã triển khai: 'https://your-ams-backend.onrender.com/solve'
+            // Hãy THAY THẾ 'http://127.0.0.1:5000/solve' bằng URL CÔNG KHAI của bạn.
+
+            const backendApiUrl = 'http://127.0.0.1:5000/solve'; // <-- DÒNG NÀY PHẢI ĐƯỢC THAY ĐỔI!
+
+            // Nếu bạn ĐÃ triển khai backend lên Render và có URL, hãy THAY ĐỔI DÒNG TRÊN thành:
+            // const backendApiUrl = 'https://TEN_UNG_DUNG_CUA_BAN_TREN_RENDER.onrender.com/solve';
+            // Ví dụ: const backendApiUrl = 'https://ams-solver-backend.onrender.com/solve';
+
 
             const response = await fetch(backendApiUrl, {
                 method: 'POST',
