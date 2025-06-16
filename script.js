@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Ví dụ về URL đã triển khai: 'https://your-ams-backend.onrender.com/solve'
             // Hãy THAY THẾ 'http://127.0.0.1:5000/solve' bằng URL CÔNG KHAI của bạn.
 
-            const backendApiUrl = 'http://127.0.0.1:5000/solve'; // <-- DÒNG NÀY PHẢI ĐƯỢC THAY ĐỔI!
+            const backendApiUrl = 'https://ams-5b33.onrender.com/solve'; // <-- DÒNG NÀY PHẢI ĐƯỢC THAY ĐỔI!
 
             // Nếu bạn ĐÃ triển khai backend lên Render và có URL, hãy THAY ĐỔI DÒNG TRÊN thành:
             // const backendApiUrl = 'https://TEN_UNG_DUNG_CUA_BAN_TREN_RENDER.onrender.com/solve';
