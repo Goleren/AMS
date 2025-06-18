@@ -6,6 +6,86 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app) 
 
+import sympy
+from sympy.abc import symbols
+class CustomRootPrinter(sympy.Printer):
+    def _print_Pow(self, expr):
+        base = expr.base
+        exponent = expr.exp
+        if isinstance(exponent, sympy.Rational) and exponent.p == 1:
+            root_val = exponent.q
+            formatted_base = self._print(base)
+            return f"({root_val})#{formatted_base}"
+        elif isinstance(exponent, sympy.Pow) and exponent.exp == -1:
+            root_val = exponent.base
+            formatted_base = self._print(base)
+            return f"({root_val})#{formatted_base}"
+        elif exponent.is_Pow and exponent.exp == -1:
+             root_val = exponent.base
+             formatted_base = self._print(base)
+             formatted_root = self._print(root_val)
+             return f"({formatted_root})#{formatted_base}"
+        return super()._print_Pow(expr)
+    def _print_Add(self, expr):
+        return super()._print_Add(expr)
+
+    def _print_Mul(self, expr):
+        return super()._print_Mul(expr)
+my_root_printer = CustomRootPrinter()
+def format_solution_for_display(sym_expr):
+    return my_root_printer.doprint(sym_expr)
+import re
+
+def parse_custom_root_input(expression_str):
+    def replace_root_syntax(match):
+        root_part = match.group(1) 
+        base_part = match.group(2)
+        return f"({base_part})**(1/{root_part})"
+    processed_str = re.sub(r'\( ( [a-zA-Z0-9_./+\-* ]+ ) \) # ( [a-zA-Z0-9_.]+ )', replace_root_syntax, expression_str.replace(" ", ""))
+    return processed_str
+def solve_multiple_equations(equation_strings):    
+    sympy_equations = []
+    all_symbols = set()
+
+    for eq_str in equation_strings:
+        if '=' in eq_str:
+            lhs_str, rhs_str = eq_str.split('=', 1)
+            sym_eq = sympy.sympify(lhs_str) - sympy.sympify(rhs_str)
+        else:
+            sym_eq = sympy.sympify(eq_str)
+
+        sympy_equations.append(sym_eq)
+        all_symbols.update(sym_eq.free_symbols)
+
+    if not sympy_equations:
+        return "Please enter at least one equation."
+    
+    if not all_symbols:
+        return "No variables found to solve for."
+
+    try:
+        solutions = sympy.solve(sympy_equations, list(all_symbols))
+        return solutions
+    except Exception as e:
+        return f"Error solving equations: {e}"
+user_equation_string = "your_processed_input_string_from_user"
+if '=' in user_equation_string:
+    lhs_str, rhs_str = user_equation_string.split('=', 1)
+    sympy_expression = sympy.sympify(lhs_str) - sympy.sympify(rhs_str)
+else:
+    sympy_expression = sympy.sympify(user_equation_string)
+variables_to_solve = list(sympy_expression.free_symbols)
+try:
+    solutions = sympy.solve(sympy_expression, variables_to_solve, dict=True)
+    formatted_solutions = []
+    for sol_dict in solutions:
+        formatted_sol = {}
+        for var, val in sol_dict.items():
+            formatted_val = format_solution_for_display(val)
+            formatted_sol[str(var)] = formatted_val
+        formatted_solutions.append(formatted_sol)
+except Exception as e:
+    return f"Error: {e}"
 @app.route('/solve', methods=['POST'])
 def solve_math():
     data = request.json
