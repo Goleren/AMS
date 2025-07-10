@@ -4,7 +4,7 @@ import re
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app) # Enable CORS for all routes, allowing frontend to access backend
 
 class CustomRootPrinter(sympy.Printer):
     """
@@ -21,179 +21,126 @@ class CustomRootPrinter(sympy.Printer):
             formatted_base = self._print(base)
             return f"({root_val})#{formatted_base}"
 
-        # Case: x^(-1/n) type roots if needed, but the first case handles most 1/n exponents.
-        # This part might be redundant if the first case is comprehensive enough for 1/n.
-        elif isinstance(exponent, sympy.Pow) and exponent.exp == -1:
-            root_val = exponent.base
-            formatted_base = self._print(base)
-            return f"({root_val})#{formatted_base}"
-        
-        # Case: 1/variable root (e.g., x**(1/y) where y is a symbol)
-        elif exponent.is_Pow and exponent.exp == -1 and not exponent.base.is_constant():
-            root_val = exponent.base
-            formatted_base = self._print(base)
-            formatted_root = self._print(root_val)
-            return f"({formatted_root})#{formatted_base}"
-
-        # Default behavior for other power expressions
+        # Default SymPy printing for other power forms
         return super()._print_Pow(expr)
 
-    # You can add more custom print methods if needed for other SymPy objects
-    # def _print_Add(self, expr):
-    #     return super()._print_Add(expr)
-
-    # def _print_Mul(self, expr):
-    #     return super()._print_Mul(expr)
-
-# Instantiate the custom printer
-my_root_printer = CustomRootPrinter()
-
-def format_solution_for_display(sym_expr):
-    """Formats a SymPy expression for display using the custom printer."""
-    return my_root_printer.doprint(sym_expr)
-
-def parse_custom_root_input(expression_str):
+def parse_custom_root_input(expression):
     """
-    Converts custom root syntax (e.g., (2)#x) to SymPy compatible format (x**(1/2)).
-    Also handles "a.b" to "a*b" and "2a" to "2*a" for simpler input.
+    Parses custom root notations (e.g., '2#x', '(2)#x') and
+    implicit multiplications into SymPy-compatible format.
     """
-    # Remove spaces
-    temp_str = expression_str.replace(" ", "") 
+    processed_str = str(expression)
     
-    # Replace custom root syntax (e.g., (2)#x -> (x)**(1/2))
-    # This regex is specifically for (root_index)#base_expression
-    # It assumes base_expression does not contain #
-    processed_str = re.sub(r'\(([^()]+)\)#([a-zA-Z0-9_.]+)', r'\2**(1/\1)', temp_str)
+    # Convert 'digit#base' to 'base**(1/digit)'
+    # Example: 2#x -> x**(1/2)
+    processed_str = re.sub(r'(\d+)#([a-zA-Z0-9_.]+)', r'\2**(1/\1)', processed_str)
     
-    # Handle implicit multiplication: 2x -> 2*x, 3(x+1) -> 3*(x+1)
-    # This also converts 'a.b' to 'a*b'
-    # Pattern: digit followed by a letter/parenthesis OR letter followed by parenthesis
+    # Also handle '(digit)#base' for more explicit roots
+    # Example: (2)#x -> x**(1/2)
+    processed_str = re.sub(r'\(([^()]+)\)#([a-zA-Z0-9_.]+)', r'\2**(1/\1)', processed_str)
+    
+    # Handle implicit multiplication like '2x' or '3(x+1)'
     processed_str = re.sub(r'(\d)([a-zA-Z(])', r'\1*\2', processed_str)
+    
+    # Handle implicit multiplication like 'x(y+z)'
     processed_str = re.sub(r'([a-zA-Z])(\()', r'\1*\2', processed_str)
     
-    # Replace '.' with '*' for multiplication
+    # Handle 'a.b' as 'a*b'
     processed_str = processed_str.replace('.', '*')
     
     return processed_str
 
-def solve_expression_or_equation(expression_str_raw):
+def solve_expression_or_equation(input_str):
     """
-    Solves a single mathematical expression or equation and provides an explanation.
+    Solves a given mathematical expression or equation using SymPy.
+    Handles expressions, single-variable equations, and multi-variable equations.
     """
-    explanation = ""
-    result = ""
-    success = True
-    
     try:
-        # Step 1: Pre-process custom input syntax
-        processed_expression = parse_custom_root_input(expression_str_raw)
-        
-        # Determine if it's an equation or just an expression
-        if '=' in processed_expression:
+        # Pre-process input for custom root and implicit multiplication
+        parsed_input = parse_custom_root_input(input_str)
+
+        # Check if the input contains an equality sign to determine if it's an equation
+        if '=' in parsed_input:
             # It's an equation
-            lhs_str, rhs_str = processed_expression.split('=', 1)
+            parts = parsed_input.split('=')
+            if len(parts) != 2:
+                return {"success": False, "result": "Invalid Equation", "explanation": "Equations must have exactly one '=' sign."}
             
-            # Step 2: SymPyfying (parsing) the equation
-            lhs = sympy.sympify(lhs_str)
-            rhs = sympy.sympify(rhs_str)
+            lhs = sympy.sympify(parts[0], evaluate=False)
+            rhs = sympy.sympify(parts[1], evaluate=False)
             equation_sym = sympy.Eq(lhs, rhs)
             
-            # Identify free symbols (variables)
+            # Find all free symbols in the equation
             free_symbols = list(equation_sym.free_symbols)
             
             if not free_symbols:
-                # Case: Equation with no variables (e.g., 2 + 3 = 5 or 2 = 3)
-                if equation_sym.is_Relational: # Check if it's a relation (e.g., Eq, Gt, Lt)
-                    if equation_sym == True: # If 2+3=5 evaluates to True
-                        result = "Equation is always true (Identity)."
-                        explanation = f"The equation '{expression_str_raw}' simplifies to a true statement, meaning it is an identity. For example, both sides of the equation might simplify to the same constant value."
-                    else: # If 2=3 evaluates to False
-                        result = "Equation is false (Contradiction)."
-                        explanation = f"The equation '{expression_str_raw}' simplifies to a false statement, meaning there is no solution. For example, it might simplify to '0 = 5'."
+                # If no free symbols, evaluate the boolean expression
+                result = sympy.simplify(equation_sym)
+                if result == True:
+                    return {"success": True, "result": "True", "explanation": "The statement is always true."}
+                elif result == False:
+                    return {"success": True, "result": "False", "explanation": "The statement is always false."}
                 else:
-                    # Should not happen if '=' is present and it's not a relational, but for safety:
-                    result = "Error: Invalid equation format or no identifiable relation."
-                    explanation = "The input appears to be an equation but could not be parsed as a valid relational expression."
-                success = False
-            else:
-                # Attempt to solve the equation
-                solutions_raw = sympy.solve(equation_sym, free_symbols)
-                
-                if not solutions_raw:
-                    result = "No solutions found or infinite solutions."
-                    explanation = f"SymPy could not find explicit solutions for the equation '{expression_str_raw}'. This might mean there are no solutions, or there are infinitely many solutions (e.g., an identity like x = x), or the equation is too complex for SymPy to solve explicitly."
-                    # Refine explanation for identities if possible
-                    if len(free_symbols) == 1 and sympy.simplify(lhs - rhs) == 0:
-                        result = "Equation is an identity (infinite solutions)."
-                        explanation = f"The equation '{expression_str_raw}' simplifies to '0 = 0' or a similar identity, meaning it is true for all possible values of '{free_symbols[0]}'. Thus, it has infinitely many solutions."
-                else:
-                    # Format solutions
-                    if len(free_symbols) == 1:
-                        var_name = str(free_symbols[0])
-                        if isinstance(solutions_raw, list):
-                            if len(solutions_raw) == 1:
-                                result = f"{var_name} = {format_solution_for_display(solutions_raw[0])}"
-                                explanation = f"The equation was solved for '{var_name}'. Substituting this value back into the original equation will make both sides equal."
-                            elif len(solutions_raw) > 1:
-                                formatted_sols = [format_solution_for_display(sol) for sol in solutions_raw]
-                                result = f"{var_name} = " + ", ".join(formatted_sols)
-                                explanation = f"The equation has multiple solutions for '{var_name}'. Each of these values will satisfy the original equation."
-                            else: # Empty list for single variable after solve, meaning no solution
-                                result = "No solution found for this equation."
-                                explanation = "SymPy could not find any explicit solution for the variable in this equation."
-                        else: # E.g., for non-linear equations, solve might return a set or dict
-                            result = f"{var_name} = {format_solution_for_display(solutions_raw)}"
-                            explanation = f"The equation was solved for '{var_name}'."
+                    return {"success": True, "result": str(result), "explanation": "Evaluated as a boolean expression."}
 
-                    elif len(free_symbols) > 1:
-                        # Handle systems of equations or multi-variable single equations
-                        # sympy.solve returns a list of dictionaries for multiple variables
-                        formatted_solutions = []
-                        if isinstance(solutions_raw, dict): # Single solution for multiple vars
-                            formatted_sol = {str(k): format_solution_for_display(v) for k, v in solutions_raw.items()}
-                            formatted_solutions.append(formatted_sol)
-                        elif isinstance(solutions_raw, list) and all(isinstance(s, dict) for s in solutions_raw):
-                            for sol_dict in solutions_raw:
-                                formatted_sol = {str(k): format_solution_for_display(v) for k, v in sol_dict.items()}
-                                formatted_solutions.append(formatted_sol)
-                        
-                        if formatted_solutions:
-                            result = "Solutions: " + str(formatted_solutions) # Use simple string conversion for dicts/lists
-                            explanation = f"The equation (or system if multiple were provided) was solved for the variables {', '.join(str(s) for s in free_symbols)}. The solutions are presented as a set of assignments for each variable."
-                        else:
-                            result = "No explicit solutions found for multiple variables."
-                            explanation = "SymPy could not find explicit solutions for the variables in this multi-variable equation. This might indicate no solutions, infinite solutions, or a complex solution space."
-                    
+            elif len(free_symbols) == 1:
+                # Single variable equation
+                symbol = free_symbols[0]
+                solutions = sympy.solve(equation_sym, symbol)
+                
+                if not solutions:
+                    return {"success": True, "result": "No solution", "explanation": "The equation has no solution."}
+                elif solutions == [sympy.S.Reals]: # Check for all real numbers as solution (SymPy's representation for x=x)
+                     return {"success": True, "result": "Infinite solutions (all real numbers)", "explanation": "The equation is true for all real numbers."}
+                else:
+                    # Use the custom printer for solutions that are Pow objects (roots)
+                    printer = CustomRootPrinter()
+                    formatted_solutions = [printer.doprint(sol) for sol in solutions]
+                    return {"success": True, "result": f"x = {', '.join(formatted_solutions)}", "explanation": "Solution(s) found for the equation."}
+            else:
+                # Multi-variable equation (SymPy solve can handle systems, but for single eq, it gives implicit solutions)
+                solutions = sympy.solve(equation_sym, free_symbols)
+                if solutions:
+                    # Attempt to provide a simplified form or show relationships
+                    # For multi-variable, solution is often a dictionary or list of dicts
+                    printer = CustomRootPrinter()
+                    formatted_solutions = []
+                    for sol_set in solutions:
+                        if isinstance(sol_set, dict):
+                            formatted_sol = ", ".join([f"{printer.doprint(k)} = {printer.doprint(v)}" for k, v in sol_set.items()])
+                        else: # Can be a tuple for multiple solutions per variable
+                            formatted_sol = str(sol_set) # Fallback to default string
+                        formatted_solutions.append(formatted_sol)
+                    return {"success": True, "result": "Solutions for multiple variables", "explanation": f"The equation has multiple variables: {'; '.join(formatted_solutions)}"}
+                else:
+                    return {"success": True, "result": "No obvious solution for multiple variables", "explanation": "Could not find explicit solutions for the given multi-variable equation."}
+
         else:
-            # It's an expression (no '=')
-            expression_sym = sympy.sympify(processed_expression)
-            
-            # Identify free symbols (variables)
+            # It's an expression
+            expression_sym = sympy.sympify(parsed_input, evaluate=False) # evaluate=False to prevent immediate simplification before custom printer
+
+            # Check for free symbols in the expression
             free_symbols = list(expression_sym.free_symbols)
 
+            printer = CustomRootPrinter()
+            result_str = printer.doprint(expression_sym) # Use custom printer for output
+
             if not free_symbols:
-                # Case: Pure arithmetic expression (e.g., 2+3*4)
-                result = format_solution_for_display(expression_sym.evalf()) # Evaluate numerically
-                explanation = f"The arithmetic expression '{expression_str_raw}' was evaluated to its numerical value."
+                # If no free symbols, evaluate to a numerical value
+                # Use evaluate=True here to get numerical result
+                evaluated_result = sympy.sympify(parsed_input) 
+                explanation = f"This is an arithmetic expression. The result is calculated."
+                return {"success": True, "result": str(evaluated_result), "explanation": explanation}
             else:
-                # Case: Algebraic expression (e.g., x + 2*y)
-                simplified_expr = sympy.simplify(expression_sym)
-                result = format_solution_for_display(simplified_expr)
-                explanation = f"The algebraic expression '{expression_str_raw}' was simplified. No specific numerical solution can be found without assigning values to variables or forming an equation."
-                if simplified_expr != expression_sym:
-                    explanation += f" It simplifies to: {format_solution_for_display(simplified_expr)}."
+                # If there are free symbols, simplify the expression
+                simplified_expression = sympy.simplify(expression_sym)
+                explanation = f"This is an algebraic expression. The simplified form is shown."
+                return {"success": True, "result": printer.doprint(simplified_expression), "explanation": explanation}
 
-    except (sympy.SympifyError, ValueError, TypeError) as e:
-        success = False
-        result = "Invalid input or syntax error."
-        explanation = f"Please check your expression/equation. Make sure variables are single letters or known symbols. Error details: {e}"
+    except (sympy.SympifyError, TypeError, ValueError) as e:
+        return {"success": False, "result": "Invalid Input", "explanation": f"Please check your math expression or equation syntax. Error: {e}"}
     except Exception as e:
-        success = False
-        result = "An unexpected error occurred."
-        explanation = f"Something went wrong while processing your request. Please try again or simplify your input. Error details: {e}"
-
-    return {"success": success, "result": result, "explanation": explanation}
-
+        return {"success": False, "result": "An unexpected error occurred", "explanation": f"Please try again or simplify your input. Details: {e}"}
 
 @app.route('/solve', methods=['POST'])
 def solve_math():
@@ -230,6 +177,7 @@ def solve_math():
             "success": False,
             "message": result_data["result"], # Use 'result' field for short error message
             "explanation": result_data["explanation"] # Use 'explanation' for detailed error
-        }), 400 # Return 400 for client-side errors / invalid input
+        }), 400 # Return 400 for client-side errors
 
-if __name
+if __name__ == '__main__':
+    app.run(debug=True)
