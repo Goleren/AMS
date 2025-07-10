@@ -30,6 +30,7 @@ body {
 .navbar-left, .navbar-right {
     display: flex;
     align-items: center;
+    gap: 10px; /* Add gap between buttons in navbar */
 }
 
 .nav-button {
@@ -42,12 +43,17 @@ body {
     font-size: 1em;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin: 0 5px; /* Spacing between buttons if more than one */
+    /* margin: 0 5px; Removed specific margin, using gap on parent instead */
 }
 
 .nav-button:hover {
     background-color: #0056b3;
     transform: translateY(-1px);
+}
+
+/* Specific style for the settings icon button */
+#settingsButton {
+    padding: 8px 12px; /* Adjust padding for icon-only button */
 }
 
 /* MAIN CONTENT WRAPPER: To create spacing below the navbar */
@@ -110,7 +116,7 @@ input[type="text"]:focus {
 }
 
 button {
-    background-color: #28a745;
+    background-color: #1587df;
     color: white;
     padding: 12px 25px;
     border: none;
@@ -123,13 +129,13 @@ button {
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #919de6;
     transform: translateY(-2px);
 }
 
 #resultsSection {
     margin-top: 35px;
-    border-top: 1px dashed #ccc;
+    border-top: 1px dashed #f3efef;
     padding-top: 30px;
     text-align: left;
 }
@@ -150,7 +156,7 @@ button:hover {
 .result-display {
     font-weight: bold;
     font-size: 1.4em;
-    color: #dc3545;
+    color: #000000;
     background-color: #fff3cd;
     padding: 10px;
     border-radius: 5px;
@@ -171,6 +177,7 @@ button:hover {
 }
 
 /* OVERLAY/MODAL STYLES (for Versions and Instructions sections) */
+/* Re-using these styles for all modals (versions, instructions, auth, chat box) */
 .overlay {
     position: fixed; /* Fixed position on screen */
     top: 0;
@@ -233,7 +240,6 @@ button:hover {
     font-family: 'Consolas', 'Courier New', monospace;
 }
 
-
 .close-button {
     position: absolute;
     top: 10px;
@@ -249,50 +255,253 @@ button:hover {
     color: #333;
 }
 
-/* Hidden class for initial state */
+/* Hidden class for initial state (used for all overlays/modals) */
 .hidden {
     display: none;
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        padding: 10px;
-    }
-    .nav-button {
-        width: calc(100% - 10px); /* Adjust button width */
-        margin-bottom: 5px;
-    }
-    .navbar-right {
-        width: 100%;
-    }
-    .container {
-        padding: 25px 20px;
-        box-shadow: none;
-    }
 
-    h1 {
-        font-size: 1.8em;
-    }
-
-    input[type="text"],
-    button {
-        font-size: 1em;
-        padding: 10px;
-    }
-
-    .result-display {
-        font-size: 1.2em;
-    }
-
-    .explanation-display {
-        font-size: 0.9em;
-        padding: 15px;
-    }
-
-    .overlay-content {
-        max-width: 95%; /* Wider on mobile */
-        padding: 20px;
-    }
+/* --- New CSS for Chat Box (re-using .overlay and .overlay-content) --- */
+#chatBoxContainer {
+    position: fixed; /* Keep it fixed on the screen */
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    max-height: 500px; /* Maximum height */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 1000; /* Ensure it's above other content but below full overlays */
+    display: flex;
+    flex-direction: column;
+    /* Use overlay properties for animation */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
+/* Override the .hidden behavior for chatbox to use visibility/opacity */
+#chatBoxContainer.hidden {
+    display: flex; /* Keep it flex, but hide with opacity/visibility */
+    opacity: 0;
+    visibility: hidden;
+}
+
+#chatBoxContainer.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.chat-header {
+    background-color: #f0f0f0;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* Re-using .close-button for chat box */
+.chat-header .close-btn {
+    position: static; /* Override absolute positioning */
+    font-size: 1.5em; /* Smaller 'x' for chat box */
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.chat-header .close-btn:hover {
+    color: #555;
+}
+
+.chat-content {
+    padding: 15px;
+    flex-grow: 1; /* Allows content to take remaining space */
+    overflow-y: auto; /* Adds scrollbar if content overflows */
+    display: flex; /* Flex container for internal elements */
+    flex-direction: column;
+}
+
+#commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto; /* Pushes the form to the bottom of the chat-content */
+}
+
+.rating-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stars .star {
+    font-size: 24px;
+    color: #ccc; /* Unselected star color */
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.stars .star.selected,
+.stars .star.hovered {
+    color: #ffc107; /* Selected or hovered star color (yellow/gold) */
+}
+
+#commentText {
+    width: calc(100% - 18px); /* Adjust width for padding and border */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; /* Allow vertical resizing */
+    font-family: inherit; /* Inherit font from body */
+    font-size: 0.95em;
+}
+
+#submitCommentBtn {
+    background-color: #2ca8dc; /* Green for submit */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make button full width of its container */
+}
+
+#submitCommentBtn:hover {
+    background-color: #31bdd6;
+}
+
+#commentSection {
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    max-height: 150px; /* Limit height for comment display area */
+    overflow-y: auto;
+    margin-bottom: 10px;
+    color: #444;
+    font-size: 0.9em;
+}
+
+.user-comment {
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+.user-comment:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.user-comment strong {
+    color: #007bff;
+}
+.user-comment .rating {
+    color: #ffc107;
+}
+
+#chatStatusMessage {
+    text-align: center;
+    margin-bottom: 10px;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9em;
+}
+
+
+/* --- New CSS for Auth Modal (Login/Signup) --- */
+/* Re-using .overlay and .overlay-content for consistency */
+#authModal .overlay-content {
+    max-width: 500px; /* Specific max-width for auth modal */
+    text-align: center; /* Center content within modal */
+    padding: 30px 40px;
+}
+
+#authModal h2 {
+    margin-bottom: 25px;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 12px 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1.05em;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    color: #555;
+    font-weight: bold;
+}
+
+.tab-button.active {
+    border-bottom: 3px solid #007bff;
+    color: #007bff;
+}
+
+.tab-button:hover:not(.active) {
+    background-color: #f5f5f5;
+    color: #007bff;
+}
+
+.auth-form {
+    padding-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Align labels and inputs to the left */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="email"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.auth-form button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
