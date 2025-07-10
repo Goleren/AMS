@@ -2,39 +2,39 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5; /* Changed to a light gray for background */
+    background-color: #f0f2f5; /* Light gray background */
     display: flex;
-    flex-direction: column; /* Allows stacking header and content vertically */
+    flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    padding: 0; /* Remove old padding from body */
+    padding: 0;
     box-sizing: border-box;
 }
 
 /* HEADER BAR STYLES */
 .navbar {
-    background-color: #333; /* Dark background - unchanged as per prompt implied to keep header dark */
+    background-color: #333; /* Dark background */
     color: white;
     padding: 10px 20px;
     display: flex;
-    justify-content: space-between; /* Push buttons to ends */
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
-    position: sticky; /* Keeps navbar at the top when scrolling */
+    position: sticky;
     top: 0;
-    z-index: 1000; /* Ensure it's above other content */
+    z-index: 1000;
 }
 
 .navbar-left, .navbar-right {
     display: flex;
     align-items: center;
-    gap: 10px; /* Add gap between buttons in navbar */
+    gap: 10px;
 }
 
 .nav-button {
-    background-color: #87ceeb; /* Changed to light blue for buttons */
+    background-color: #87ceeb; /* Light blue for buttons */
     color: white;
     padding: 8px 15px;
     border: none;
@@ -52,23 +52,56 @@ body {
 
 /* Specific style for the settings icon button */
 #settingsButton {
-    padding: 8px 12px; /* Adjust padding for icon-only button */
+    padding: 8px 12px;
 }
 
-/* MAIN CONTENT WRAPPER: To create spacing below the navbar */
+/* User Profile in Navbar */
+#userProfileInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer; /* Indicates it's clickable */
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+#userProfileInfo:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#profilePicture {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #eee; /* Placeholder background */
+    border: 2px solid white;
+    object-fit: cover;
+    display: block; /* Ensures it behaves like an image */
+}
+
+#userName {
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+
+/* MAIN CONTENT WRAPPER */
 .content-wrapper {
-    flex-grow: 1; /* Allows it to expand and take remaining space */
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 40px 20px; /* Padding for the main content area */
+    padding: 40px 20px;
     box-sizing: border-box;
-    margin-top: 20px; /* Add some space below the navbar */
+    margin-top: 20px;
 }
 
-/* MAIN CONTAINER STYLES (Kept similar or slightly updated) */
+/* MAIN CONTAINER STYLES */
 .container {
-    background-color: #ffffff; /* Main container background set to white */
+    background-color: #ffffff;
     padding: 35px 45px;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
@@ -79,7 +112,7 @@ body {
 }
 
 h1 {
-    color: #87ceeb; /* Changed to light blue */
+    color: #87ceeb;
     margin-bottom: 15px;
     font-size: 2.2em;
 }
@@ -97,24 +130,30 @@ p {
     margin-bottom: 30px;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea { /* Added textarea here */
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid #a0d9e7; /* Unchanged, good with light blue theme */
+    border: 2px solid #a0d9e7;
     border-radius: 6px;
     font-size: 1.1em;
     box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-input[type="text"]:focus {
-    border-color: #87ceeb; /* Changed to light blue */
-    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.25); /* Light blue shadow */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #87ceeb;
+    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.25);
     outline: none;
 }
 
 button {
-    background-color: #87ceeb; /* Changed to light blue for main button */
+    background-color: #87ceeb;
     color: white;
     padding: 12px 25px;
     border: none;
@@ -127,7 +166,7 @@ button {
 }
 
 button:hover {
-    background-color: #6aadda; /* Darker shade of light blue on hover */
+    background-color: #6aadda;
     transform: translateY(-2px);
 }
 
@@ -139,13 +178,13 @@ button:hover {
 }
 
 #resultsSection h2 {
-    color: #87ceeb; /* Changed to light blue */
+    color: #87ceeb;
     margin-bottom: 15px;
     font-size: 1.8em;
 }
 
 #resultsSection h3 {
-    color: #333; /* Changed to dark gray for headings */
+    color: #333;
     margin-top: 25px;
     margin-bottom: 10px;
     font-size: 1.4em;
@@ -154,8 +193,8 @@ button:hover {
 .result-display {
     font-weight: bold;
     font-size: 1.4em;
-    color: #000000; /* Changed to black for result text */
-    background-color: #e0f2f7; /* Light background for the result display box */
+    color: #000000;
+    background-color: #e0f2f7;
     padding: 10px;
     border-radius: 5px;
     display: inline-block;
@@ -163,54 +202,54 @@ button:hover {
 }
 
 .explanation-display {
-    background-color: #f8f9fa; /* Light background for explanation */
+    background-color: #f8f9fa;
     padding: 20px;
     border-radius: 8px;
-    white-space: pre-wrap; /* Preserve whitespace and line breaks */
-    word-wrap: break-word; /* Break long words */
+    white-space: pre-wrap;
+    word-wrap: break-word;
     font-family: 'Consolas', 'Courier New', monospace;
     font-size: 0.95em;
-    color: #444; /* Dark gray for explanation text */
+    color: #444;
     border: 1px solid #e2e6ea;
 }
 
 /* OVERLAY/MODAL STYLES (for Versions and Instructions sections) */
-/* Re-using these styles for all modals (versions, instructions, auth, chat box) */
+/* These still use the smaller overlay style */
 .overlay {
-    position: fixed; /* Fixed position on screen */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Dimmed background - unchanged */
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; /* Ensure it's above all other content */
-    opacity: 0; /* Initially transparent */
-    visibility: hidden; /* Initially completely hidden */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition effect */
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.overlay.visible { /* When 'visible' class is added */
-    opacity: 1; /* Show */
+.overlay.visible {
+    opacity: 1;
     visibility: visible;
 }
 
 .overlay-content {
-    background-color: white; /* Overlay content background set to white */
+    background-color: white;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    max-width: 80%; /* Limit width */
-    max-height: 80%; /* Limit height */
-    overflow-y: auto; /* Allow scrolling if content is too long */
-    position: relative; /* For close-button positioning */
-    text-align: left; /* Align content within overlay */
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+    text-align: left;
 }
 
 .overlay-content h2, .overlay-content h3 {
-    color: #87ceeb; /* Changed to light blue */
+    color: #87ceeb;
     margin-bottom: 15px;
 }
 
@@ -226,12 +265,13 @@ button:hover {
 }
 
 .overlay-content pre {
-    background-color: #f0f0f0; /* Light gray for code blocks */
+    background-color: #f0f0f0;
     padding: 15px;
     border-radius: 5px;
-    overflow-x: auto; /* Allow horizontal scrolling for wide code blocks */
+    overflow-x: auto;
     font-size: 0.85em;
-    color: #333; /* Dark gray for code text */
+    color: #333;
+    border: 1px solid #e2e6ea;
 }
 
 .overlay-content code {
@@ -253,33 +293,30 @@ button:hover {
     color: #333;
 }
 
-/* Hidden class for initial state (used for all overlays/modals) */
 .hidden {
-    display: none;
+    display: none !important; /* Use !important to ensure hiding */
 }
 
 
-/* --- New CSS for Chat Box (re-using .overlay and .overlay-content) --- */
+/* --- Chat Box Styles (re-using .overlay and .overlay-content principles) --- */
 #chatBoxContainer {
-    position: fixed; /* Keep it fixed on the screen */
+    position: fixed;
     bottom: 20px;
     right: 20px;
     width: 350px;
-    max-height: 500px; /* Maximum height */
-    background-color: white; /* Chat box background set to white */
+    max-height: 500px;
+    background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    z-index: 1000; /* Ensure it's above other content but below full overlays */
+    z-index: 1000;
     display: flex;
     flex-direction: column;
-    /* Use overlay properties for animation */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Override the .hidden behavior for chatbox to use visibility/opacity */
 #chatBoxContainer.hidden {
     display: flex; /* Keep it flex, but hide with opacity/visibility */
     opacity: 0;
@@ -292,7 +329,7 @@ button:hover {
 }
 
 .chat-header {
-    background-color: #f0f0f0; /* Light gray for chat header */
+    background-color: #f0f0f0;
     padding: 10px 15px;
     border-bottom: 1px solid #ddd;
     display: flex;
@@ -303,13 +340,12 @@ button:hover {
 .chat-header h3 {
     margin: 0;
     font-size: 1.1em;
-    color: #333; /* Dark gray for chat header text */
+    color: #333;
 }
 
-/* Re-using .close-button for chat box */
 .chat-header .close-btn {
-    position: static; /* Override absolute positioning */
-    font-size: 1.5em; /* Smaller 'x' for chat box */
+    position: static;
+    font-size: 1.5em;
     font-weight: bold;
     color: #888;
     cursor: pointer;
@@ -322,9 +358,9 @@ button:hover {
 
 .chat-content {
     padding: 15px;
-    flex-grow: 1; /* Allows content to take remaining space */
-    overflow-y: auto; /* Adds scrollbar if content overflows */
-    display: flex; /* Flex container for internal elements */
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
     flex-direction: column;
 }
 
@@ -332,39 +368,40 @@ button:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: auto; /* Pushes the form to the bottom of the chat-content */
+    margin-top: auto;
 }
 
 .rating-section {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 5px; /* Added some margin */
 }
 
 .stars .star {
     font-size: 24px;
-    color: #ccc; /* Unselected star color */
+    color: #ccc;
     cursor: pointer;
     transition: color 0.2s ease;
 }
 
 .stars .star.selected,
 .stars .star.hovered {
-    color: #87ceeb; /* Changed to light blue for selected/hovered stars */
+    color: #87ceeb;
 }
 
 #commentText {
-    width: calc(100% - 18px); /* Adjust width for padding and border */
+    width: calc(100% - 18px);
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    resize: vertical; /* Allow vertical resizing */
-    font-family: inherit; /* Inherit font from body */
+    resize: vertical;
+    font-family: inherit;
     font-size: 0.95em;
 }
 
 #submitCommentBtn {
-    background-color: #87ceeb; /* Changed to light blue for submit button */
+    background-color: #87ceeb;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -373,19 +410,19 @@ button:hover {
     font-size: 1em;
     font-weight: bold;
     transition: background-color 0.3s ease;
-    width: 100%; /* Make button full width of its container */
+    width: 100%;
 }
 
 #submitCommentBtn:hover {
-    background-color: #6aadda; /* Darker shade of light blue on hover */
+    background-color: #6aadda;
 }
 
 #commentSection {
     border: 1px solid #eee;
     padding: 10px;
     border-radius: 5px;
-    background-color: #f9f9f9; /* Light gray for comment section background */
-    max-height: 150px; /* Limit height for comment display area */
+    background-color: #f9f9f9;
+    max-height: 150px;
     overflow-y: auto;
     margin-bottom: 10px;
     color: #444;
@@ -402,10 +439,10 @@ button:hover {
     margin-bottom: 0;
 }
 .user-comment strong {
-    color: #87ceeb; /* Changed to light blue for strong text in comments */
+    color: #87ceeb;
 }
 .user-comment .rating {
-    color: #87ceeb; /* Changed to light blue for rating stars in comments */
+    color: #87ceeb;
 }
 
 #chatStatusMessage {
@@ -417,123 +454,255 @@ button:hover {
 }
 
 
-/* --- Updated CSS for Auth Modal (Login/Signup) to be like IOE.edu --- */
-#authModal .overlay-content {
-    max-width: 400px; /* Make it a bit narrower for a more compact look like IOE */
-    text-align: center; /* Center content within modal */
-    padding: 30px; /* Adjusted padding */
+/* --- Auth Modal (Login/Signup) Full Screen Styles --- */
+#authModal.modal { /* Target with .modal to override .overlay properties */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Slightly darker overlay for full screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000; /* Higher z-index to ensure it's on top of everything */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#authModal.modal.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#authModal .modal-content {
+    background-color: #ffffff;
+    padding: 40px; /* Increased padding */
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 450px; /* Wider than before, but still compact */
+    width: 90%; /* Responsive width */
+    max-height: 90vh; /* Max height to prevent overflow on small screens */
+    overflow-y: auto; /* Allow scrolling if content is too long */
+    position: relative;
+    text-align: center;
+    display: flex; /* Use flex to align content vertically */
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+}
+
+#authModal .close-button {
+    top: 15px;
+    right: 20px;
+    font-size: 2.5em; /* Larger close button */
+    color: #666;
 }
 
 #authModal h2 {
-    margin-bottom: 25px;
-    color: #333; /* Changed heading color to dark gray for a simpler look */
-    font-size: 1.8em; /* Slightly smaller heading */
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2em;
 }
 
 .tabs {
     display: flex;
-    justify-content: center; /* Center the tab buttons */
-    margin-bottom: 25px;
-    border-bottom: none; /* Remove the bottom border for a cleaner look */
-    gap: 15px; /* Add space between tab buttons */
+    justify-content: center;
+    width: 100%; /* Tabs take full width */
+    margin-bottom: 30px; /* More space below tabs */
+    border-bottom: 1px solid #eee; /* Subtle separator */
 }
 
 .tab-button {
-    flex: none; /* Do not make them take full width */
-    padding: 8px 15px; /* Reduced padding */
-    border: 1px solid #ccc; /* Add a subtle border */
-    border-radius: 5px; /* Rounded corners for tabs */
-    background-color: #f8f8f8; /* Light background for inactive tabs */
+    flex: 1; /* Allow tabs to grow and fill space */
+    padding: 12px 0; /* Adjusted padding */
+    border: none;
+    border-bottom: 3px solid transparent; /* Highlight active tab with bottom border */
+    background-color: transparent;
     cursor: pointer;
-    font-size: 1em; /* Standard font size */
-    border-bottom: none; /* Remove specific bottom border as we're using full border */
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #777;
     transition: all 0.3s ease;
-    color: #555;
-    font-weight: normal; /* Less bold for a softer look */
+    text-align: center;
 }
 
 .tab-button.active {
-    border-color: #87ceeb; /* Light blue border for active tab */
-    background-color: #87ceeb; /* Light blue background for active tab */
-    color: white; /* White text for active tab */
-    font-weight: bold; /* Make active tab text bold */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for active tab */
+    color: #87ceeb; /* Light blue for active tab */
+    border-bottom-color: #87ceeb; /* Active tab underline */
+    background-color: #f0f8ff; /* Very light blue background for active tab */
 }
 
 .tab-button:hover:not(.active) {
-    background-color: #e5f5ff; /* Lighter light blue on hover for inactive tabs */
-    color: #333; /* Darker text on hover */
-    border-color: #b3e0ff; /* Lighter blue border on hover */
+    color: #333;
+    background-color: #f9f9f9;
 }
 
 .auth-form {
-    padding-top: 10px; /* Keep some top padding */
-    /* Only display the active form */
+    width: 100%;
+    display: flex; /* Make form a flex container */
+    flex-direction: column; /* Stack form groups */
+    gap: 15px; /* Space between form groups */
 }
 
-.auth-form.hidden-form {
-    display: none;
+.auth-form h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    text-align: center; /* Center form heading */
 }
 
 .form-group {
-    margin-bottom: 18px; /* Slightly adjusted margin */
-    text-align: left; /* Align labels and inputs to the left */
+    position: relative; /* For icon positioning */
+    margin-bottom: 0; /* Remove default margin as flex gap handles it */
+    text-align: left; /* Align labels */
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 6px; /* Reduced margin for labels */
-    font-weight: bold;
-    color: #333; /* Dark gray for form labels */
-    font-size: 0.9em; /* Slightly smaller font size for labels */
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95em;
 }
 
-.form-group input[type="text"],
-.form-group input[type="password"],
-.form-group input[type="email"] {
-    width: 100%;
-    padding: 10px 12px; /* Slightly reduced padding */
-    border: 1px solid #ccc; /* Simple border */
-    border-radius: 4px; /* Slightly less rounded corners */
+.form-group input {
+    width: calc(100% - 40px); /* Adjust width for icon padding */
+    padding: 12px 15px 12px 40px; /* Left padding for icon */
+    border: 1px solid #ddd;
+    border-radius: 8px; /* More rounded inputs */
     font-size: 1em;
     box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fcfcfc; /* Slightly off-white background */
 }
 
-.form-group input[type="text"]:focus,
-.form-group input[type="password"]:focus,
-.form-group input[type="email"]:focus {
-    border-color: #87ceeb; /* Light blue border on focus */
+.form-group input:focus {
+    border-color: #87ceeb;
+    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.15);
     outline: none;
-    box-shadow: 0 0 0 2px rgba(135, 206, 235, 0.2); /* Light blue shadow on focus */
+}
+
+.form-group .fa-solid, .form-group .fa-regular { /* Icons for input fields */
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(calc(-50% + 4px)); /* Adjust for label height */
+    color: #888;
+    font-size: 1em;
+    pointer-events: none; /* Make sure icon doesn't block input clicks */
+}
+
+.form-group .password-toggle-icon { /* Eye icon for password */
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(calc(-50% + 4px)); /* Adjust for label height */
+    color: #888;
+    cursor: pointer;
+    font-size: 1em;
+    transition: color 0.2s ease;
+}
+.form-group .password-toggle-icon:hover {
+    color: #555;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: flex-start; /* Align checkbox to top of text */
+    gap: 8px;
+    margin-top: 15px;
+    margin-bottom: 20px; /* Space before button */
+    font-size: 0.9em;
+    color: #555;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-top: 4px; /* Align checkbox vertically with text */
+    width: auto; /* Reset width for checkbox */
+    accent-color: #87ceeb; /* Blue checkbox */
+    cursor: pointer;
+}
+
+.checkbox-group a {
+    color: #87ceeb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: text-decoration 0.2s ease;
+}
+
+.checkbox-group a:hover {
+    text-decoration: underline;
 }
 
 .auth-form button[type="submit"] {
-    background-color: #87ceeb; /* Changed to light blue for auth submit button */
+    background-color: #87ceeb;
     color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.05em; /* Slightly smaller font for submit button */
-    font-weight: bold;
-    width: 100%;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 10px; /* Added some margin top for separation */
+    padding: 15px 25px; /* Larger button */
+    border-radius: 8px; /* More rounded button */
+    font-size: 1.15em; /* Larger font */
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(135, 206, 235, 0.2); /* Subtle shadow */
 }
 
 .auth-form button[type="submit"]:hover {
-    background-color: #6aadda; /* Darker shade of light blue on hover */
-    transform: translateY(-1px);
+    background-color: #6aadda;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(135, 206, 235, 0.3);
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0; /* Space above and below separator */
+    width: 100%;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+}
+
+.separator span {
+    padding: 0 10px;
+    color: #888;
+    font-size: 0.9em;
+}
+
+.switch-auth-mode {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 15px; /* Space below this link */
+}
+
+.switch-auth-mode a {
+    color: #87ceeb;
+    text-decoration: none;
+    font-weight: bold;
+    transition: text-decoration 0.2s ease;
+}
+
+.switch-auth-mode a:hover {
+    text-decoration: underline;
 }
 
 #authMessage {
-    color: red; /* Error messages remain red for visibility */
+    color: red;
     margin-top: 15px;
     font-size: 0.9em;
     text-align: center;
 }
-
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
@@ -542,18 +711,18 @@ button:hover {
         padding: 10px;
     }
     .navbar-right {
-        flex-wrap: wrap; /* Allow buttons to wrap to next line */
-        justify-content: center; /* Center buttons when wrapped */
+        flex-wrap: wrap;
+        justify-content: center;
         width: 100%;
-        margin-top: 10px; /* Add space between left and right sections */
+        margin-top: 10px;
     }
     .nav-button {
-        flex-grow: 1; /* Allow buttons to grow and fill space */
-        margin: 5px; /* Adjust margin for wrapped buttons */
-        min-width: 120px; /* Ensure buttons don't get too small */
+        flex-grow: 1;
+        margin: 5px;
+        min-width: 100px;
     }
     #settingsButton {
-        padding: 8px 12px; /* Keep consistent padding for icon button */
+        padding: 8px 12px;
     }
     .content-wrapper {
         padding: 20px 10px;
@@ -584,7 +753,7 @@ button:hover {
     }
 
     .overlay-content {
-        max-width: 95%; /* Wider on mobile */
+        max-width: 95%;
         padding: 20px;
     }
 
@@ -593,22 +762,45 @@ button:hover {
         width: 90%;
         bottom: 10px;
         right: 5%;
-        left: 5%; /* Center horizontally */
-        max-height: 70vh; /* Adjust max height for smaller screens */
+        left: 5%;
+        max-height: 70vh;
     }
 
     /* Auth modal adjustments for mobile */
-    #authModal .overlay-content {
-        width: 95%;
-        padding: 20px 25px;
+    #authModal .modal-content {
+        width: 95%; /* Make it fill more of the screen on mobile */
+        padding: 25px 20px;
+    }
+    #authModal h2 {
+        font-size: 1.6em;
+    }
+    .tabs {
+        margin-bottom: 20px;
     }
     .tab-button {
-        font-size: 0.95em;
+        font-size: 1em;
         padding: 10px 0;
     }
-    .form-group label,
-    .form-group input,
-    .auth-form button {
+    .auth-form h3 {
+        font-size: 1.4em;
+    }
+    .form-group input {
         font-size: 0.95em;
+        padding: 10px 15px 10px 35px; /* Adjust padding for smaller icons */
+    }
+    .form-group .fa-solid, .form-group .fa-regular {
+        left: 10px;
+        font-size: 0.9em;
+    }
+    .form-group .password-toggle-icon {
+        right: 10px;
+        font-size: 0.9em;
+    }
+    .auth-form button[type="submit"] {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+    .checkbox-group, .separator span, .switch-auth-mode {
+        font-size: 0.85em;
     }
 }
