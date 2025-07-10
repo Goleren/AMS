@@ -12,11 +12,11 @@ const instructionsSection = document.getElementById('instructionsSection');
 const chatBoxContainer = document.getElementById('chatBoxContainer');
 const authModal = document.getElementById('authModal');
 
-const mainInput = document.getElementById('mathExpressionInput'); // Corrected ID
-const solveButton = document.getElementById('solveButton'); // Corrected ID
+const mainInput = document.getElementById('mathExpressionInput');
+const solveButton = document.getElementById('solveButton');
 const resultsSection = document.getElementById('resultsSection');
-const resultText = document.getElementById('resultText'); // Corrected ID
-const explanationText = document.getElementById('explanationText'); // Corrected ID
+const resultText = document.getElementById('resultText');
+const explanationText = document.getElementById('explanationText');
 
 // Auth Modal specific elements
 const authModalCloseButton = authModal.querySelector('.close-button');
@@ -203,6 +203,15 @@ if (switchToLoginLink) {
     });
 }
 
+// Switch to Signup from Login Form (the "Register now" link)
+const switchToSignupLink = document.getElementById('switchToSignupLink');
+if (switchToSignupLink) {
+    switchToSignupLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        activateTab('signup');
+    });
+}
+
 
 // --- Form Submission Handlers (Simulated) ---
 
@@ -273,39 +282,37 @@ signupForm.addEventListener('submit', (e) => {
 });
 
 
-// --- Main Tool Logic (Keep your existing math solver logic) ---
-solveButton.addEventListener('click', () => {
+// --- Main Tool Logic (Now correctly calls the Flask backend) ---
+solveButton.addEventListener('click', async () => {
     const expression = mainInput.value.trim();
     if (expression) {
-        // --- Placeholder for actual math solving logic ---
-        // In a real application, you would send 'expression' to a backend API
-        // that performs the mathematical calculations.
-        // For demonstration, let's just do a simple string reversal or echo.
-
-        let result = "";
-        let explanation = "";
-
         try {
-            // Simple evaluation for numbers and basic operations (DO NOT use eval in production with untrusted input)
-            // For robust math solving, use a library or a backend service.
-            if (!isNaN(eval(expression))) { // rudimentary check if it's a simple math expression
-                result = eval(expression);
-                explanation = `The expression "${expression}" evaluates to ${result}.`;
-            } else if (expression.includes('x=')) {
-                result = "Simulated solution for X. (Backend needed for real solution)";
-                explanation = `For an equation like "${expression}", a real math solver would find the value(s) of X.`;
-            } else {
-                result = "Complex expression/equation. (Requires advanced parsing)";
-                explanation = `The expression "${expression}" is complex. A dedicated math solving engine is required for detailed explanation.`;
-            }
-        } catch (e) {
-            result = "Error in expression!";
-            explanation = `Could not process "${expression}". Please check the syntax. Error: ${e.message}`;
-        }
+            // Send the expression to the Flask backend
+            const response = await fetch('http://127.0.0.1:5000/solve', { // Adjust URL if your Flask server runs on a different address/port
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ expression: expression }),
+            });
 
-        resultText.textContent = result;
-        explanationText.textContent = explanation;
-        resultsSection.classList.remove('hidden');
+            const data = await response.json();
+
+            if (response.ok) { // Check if the response status is 2xx (success)
+                resultText.textContent = data.result;
+                explanationText.textContent = data.explanation;
+                resultsSection.classList.remove('hidden');
+            } else { // Handle errors from the backend (e.g., 400 Bad Request)
+                resultText.textContent = `Error: ${data.message || 'An unknown error occurred'}`;
+                explanationText.textContent = data.explanation || 'Please check your input and try again.';
+                resultsSection.classList.remove('hidden');
+            }
+        } catch (error) {
+            // Handle network errors or issues with the fetch request itself
+            resultText.textContent = 'Connection Error!';
+            explanationText.textContent = `Could not connect to the math solving server. Please ensure the backend (app.py) is running. Details: ${error.message}`;
+            resultsSection.classList.remove('hidden');
+        }
     } else {
         resultText.textContent = 'Please enter a math expression or equation!';
         explanationText.textContent = '';
