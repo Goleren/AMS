@@ -17,15 +17,15 @@
         <div class="navbar-right">
             <button id="settingsButton" class="nav-button">
                 <i class="fas fa-cog"></i> </button>
-            <button id="chatButton" class="nav-button">Rating Box</button>
-            <button id="authButton" class="nav-button">Login / Register account</button>
+            <button id="chatButton" class="nav-button">Chat Box</button>
+            <button id="authButton" class="nav-button">Log in / Register</button>
             <button id="btnInstructions" class="nav-button">Instructions</button>
         </div>
     </header>
 
     <div class="content-wrapper">
         <div class="container">
-            <h1>Welcome to AMS - Advance Math Solver</h1>
+            <h1>Welcome to AMS - Advance Math Solving</h1>
             <p>Enter your math expression or equation below and click "Solve Now" to get the result and detailed explanation.</p>
             
             <div class="input-section">
@@ -50,7 +50,7 @@
             <ul>
                 <li><strong>AMS 1.0:</strong> Basic arithmetic operations and simple algebraic expression.</li>
                 <li><strong>AMS 1.1:</strong> Adding logo, easier operations for imput and output, larger exception for variables, multivariables equation can be solve.</li>
-                <li><strong>AMS 1.2(current):</strong> More comunication tools for users</li>
+                <li><strong>AMS 1.1 (Current):</strong> More comunication tools for users
             </ul>
             <p>Stay tuned for updates!</p>
         </div>
@@ -86,7 +86,7 @@
 
     <div id="chatBoxContainer" class="hidden">
         <div class="chat-header">
-            <h3>Write down your review</h3>
+            <h3>Send Your Review and Comments</h3>
             <span class="close-btn">&times;</span>
         </div>
         <div class="chat-content">
@@ -95,7 +95,7 @@
                 </div>
             <form id="commentForm">
                 <div class="rating-section">
-                    <label for="rating">Your rating:</label>
+                    <label for="rating">Your Rating:</label>
                     <div class="stars" id="starsRating">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
@@ -106,54 +106,55 @@
                     <input type="hidden" id="selectedRating" name="rating" value="0">
                 </div>
                 <textarea id="commentText" placeholder="Write your comment here..." rows="4"></textarea>
-                <button type="submit" id="submitCommentBtn">Send comment</button>
+                <button type="submit" id="submitCommentBtn">Submit Comment</button>
             </form>
         </div>
     </div>
+
     <div id="authModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <h2>Login / Register</h2>
+            <h2>Log in / Register</h2>
             <div class="tabs">
-                <button class="tab-button active" data-tab="login">Login</button>
+                <button class="tab-button active" data-tab="login">Log in</button>
                 <button class="tab-button" data-tab="signup">Register</button>
             </div>
 
             <form id="loginForm" class="auth-form">
-                <h3>Login</h3>
+                <h3>Log in</h3>
                 <div class="form-group">
-                    <label for="loginUsername">User name:</label>
-                    <input type="text" id="loginUsername" name="username" required>
+                    <label for="loginUsername">Username:</label>
+                    <input type="text" id="loginUsername" name="username" required placeholder="Enter your username">
                 </div>
                 <div class="form-group">
                     <label for="loginPassword">Password:</label>
-                    <input type="password" id="loginPassword" name="password" required>
+                    <input type="password" id="loginPassword" name="password" required placeholder="Enter your password">
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit">Log in</button>
             </form>
 
             <form id="signupForm" class="auth-form hidden">
                 <h3>Register</h3>
                 <div class="form-group">
-                    <label for="signupUsername">User name:</label>
-                    <input type="text" id="signupUsername" name="username" required>
+                    <label for="signupUsername">Username:</label>
+                    <input type="text" id="signupUsername" name="username" required placeholder="Choose a username">
                 </div>
                 <div class="form-group">
                     <label for="signupEmail">Email:</label>
-                    <input type="email" id="signupEmail" name="email" required>
+                    <input type="email" id="signupEmail" name="email" required placeholder="Enter your email">
                 </div>
                 <div class="form-group">
                     <label for="signupPassword">Password:</label>
-                    <input type="password" id="signupPassword" name="password" required>
+                    <input type="password" id="signupPassword" name="password" required placeholder="Create a password">
                 </div>
                 <div class="form-group">
-                    <label for="signupConfirmPassword">comfirm password:</label>
-                    <input type="password" id="signupConfirmPassword" name="confirmPassword" required>
+                    <label for="signupConfirmPassword">Confirm Password:</label>
+                    <input type="password" id="signupConfirmPassword" name="confirmPassword" required placeholder="Confirm your password">
                 </div>
                 <button type="submit">Register</button>
             </form>
 
-            <p id="authMessage" style="color: rgb(40, 188, 242); margin-top: 10px;"></p>
+            <p id="authMessage" style="color: red; margin-top: 10px;"></p>
         </div>
     </div>
     <script src="script.js"></script>

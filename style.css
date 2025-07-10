@@ -417,82 +417,95 @@ button:hover {
 }
 
 
-/* --- New CSS for Auth Modal (Login/Signup) --- */
-/* Re-using .overlay and .overlay-content for consistency */
+/* --- Updated CSS for Auth Modal (Login/Signup) to be like IOE.edu --- */
 #authModal .overlay-content {
-    max-width: 500px; /* Specific max-width for auth modal */
+    max-width: 400px; /* Make it a bit narrower for a more compact look like IOE */
     text-align: center; /* Center content within modal */
-    padding: 30px 40px;
+    padding: 30px; /* Adjusted padding */
 }
 
 #authModal h2 {
     margin-bottom: 25px;
+    color: #333; /* Changed heading color to dark gray for a simpler look */
+    font-size: 1.8em; /* Slightly smaller heading */
 }
 
 .tabs {
     display: flex;
+    justify-content: center; /* Center the tab buttons */
     margin-bottom: 25px;
-    border-bottom: 1px solid #eee;
+    border-bottom: none; /* Remove the bottom border for a cleaner look */
+    gap: 15px; /* Add space between tab buttons */
 }
 
 .tab-button {
-    flex: 1;
-    padding: 12px 0;
-    border: none;
-    background-color: transparent;
+    flex: none; /* Do not make them take full width */
+    padding: 8px 15px; /* Reduced padding */
+    border: 1px solid #ccc; /* Add a subtle border */
+    border-radius: 5px; /* Rounded corners for tabs */
+    background-color: #f8f8f8; /* Light background for inactive tabs */
     cursor: pointer;
-    font-size: 1.05em;
-    border-bottom: 3px solid transparent;
+    font-size: 1em; /* Standard font size */
+    border-bottom: none; /* Remove specific bottom border as we're using full border */
     transition: all 0.3s ease;
     color: #555;
-    font-weight: bold;
+    font-weight: normal; /* Less bold for a softer look */
 }
 
 .tab-button.active {
-    border-bottom: 3px solid #87ceeb; /* Changed to light blue */
-    color: #87ceeb; /* Changed to light blue */
+    border-color: #87ceeb; /* Light blue border for active tab */
+    background-color: #87ceeb; /* Light blue background for active tab */
+    color: white; /* White text for active tab */
+    font-weight: bold; /* Make active tab text bold */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for active tab */
 }
 
 .tab-button:hover:not(.active) {
-    background-color: #f5f5f5;
-    color: #87ceeb; /* Changed to light blue */
+    background-color: #e5f5ff; /* Lighter light blue on hover for inactive tabs */
+    color: #333; /* Darker text on hover */
+    border-color: #b3e0ff; /* Lighter blue border on hover */
 }
 
 .auth-form {
-    padding-top: 10px;
+    padding-top: 10px; /* Keep some top padding */
+    /* Only display the active form */
+}
+
+.auth-form.hidden-form {
+    display: none;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 18px; /* Slightly adjusted margin */
     text-align: left; /* Align labels and inputs to the left */
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px; /* Reduced margin for labels */
     font-weight: bold;
     color: #333; /* Dark gray for form labels */
-    font-size: 0.95em;
+    font-size: 0.9em; /* Slightly smaller font size for labels */
 }
 
 .form-group input[type="text"],
 .form-group input[type="password"],
 .form-group input[type="email"] {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 10px 12px; /* Slightly reduced padding */
+    border: 1px solid #ccc; /* Simple border */
+    border-radius: 4px; /* Slightly less rounded corners */
     font-size: 1em;
     box-sizing: border-box;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-group input[type="text"]:focus,
 .form-group input[type="password"]:focus,
 .form-group input[type="email"]:focus {
-    border-color: #87ceeb; /* Changed to light blue */
+    border-color: #87ceeb; /* Light blue border on focus */
     outline: none;
-    box-shadow: 0 0 0 2px rgba(135, 206, 235, 0.2); /* Light blue shadow */
+    box-shadow: 0 0 0 2px rgba(135, 206, 235, 0.2); /* Light blue shadow on focus */
 }
 
 .auth-form button[type="submit"] {
@@ -502,10 +515,11 @@ button:hover {
     padding: 12px 25px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: 1.05em; /* Slightly smaller font for submit button */
     font-weight: bold;
     width: 100%;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px; /* Added some margin top for separation */
 }
 
 .auth-form button[type="submit"]:hover {
