@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #e0f2f7;
+    background-color: #f0f2f5; /* Changed to a light gray for background */
     display: flex;
     flex-direction: column; /* Allows stacking header and content vertically */
     min-height: 100vh;
@@ -13,7 +13,7 @@ body {
 
 /* HEADER BAR STYLES */
 .navbar {
-    background-color: #333; /* Dark background */
+    background-color: #333; /* Dark background - unchanged as per prompt implied to keep header dark */
     color: white;
     padding: 10px 20px;
     display: flex;
@@ -34,7 +34,7 @@ body {
 }
 
 .nav-button {
-    background-color: #007bff; /* Blue button color */
+    background-color: #87ceeb; /* Changed to light blue for buttons */
     color: white;
     padding: 8px 15px;
     border: none;
@@ -43,11 +43,10 @@ body {
     font-size: 1em;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    /* margin: 0 5px; Removed specific margin, using gap on parent instead */
 }
 
 .nav-button:hover {
-    background-color: #0056b3;
+    background-color: #6aadda; /* Darker shade of light blue on hover */
     transform: translateY(-1px);
 }
 
@@ -67,10 +66,9 @@ body {
     margin-top: 20px; /* Add some space below the navbar */
 }
 
-
 /* MAIN CONTAINER STYLES (Kept similar or slightly updated) */
 .container {
-    background-color: #ffffff;
+    background-color: #ffffff; /* Main container background set to white */
     padding: 35px 45px;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
@@ -81,7 +79,7 @@ body {
 }
 
 h1 {
-    color: #007bff;
+    color: #87ceeb; /* Changed to light blue */
     margin-bottom: 15px;
     font-size: 2.2em;
 }
@@ -102,7 +100,7 @@ p {
 input[type="text"] {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid #a0d9e7;
+    border: 2px solid #a0d9e7; /* Unchanged, good with light blue theme */
     border-radius: 6px;
     font-size: 1.1em;
     box-sizing: border-box;
@@ -110,13 +108,13 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    border-color: #87ceeb; /* Changed to light blue */
+    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.25); /* Light blue shadow */
     outline: none;
 }
 
 button {
-    background-color: #1587df;
+    background-color: #87ceeb; /* Changed to light blue for main button */
     color: white;
     padding: 12px 25px;
     border: none;
@@ -129,7 +127,7 @@ button {
 }
 
 button:hover {
-    background-color: #919de6;
+    background-color: #6aadda; /* Darker shade of light blue on hover */
     transform: translateY(-2px);
 }
 
@@ -141,13 +139,13 @@ button:hover {
 }
 
 #resultsSection h2 {
-    color: #007bff;
+    color: #87ceeb; /* Changed to light blue */
     margin-bottom: 15px;
     font-size: 1.8em;
 }
 
 #resultsSection h3 {
-    color: #333;
+    color: #333; /* Changed to dark gray for headings */
     margin-top: 25px;
     margin-bottom: 10px;
     font-size: 1.4em;
@@ -156,8 +154,8 @@ button:hover {
 .result-display {
     font-weight: bold;
     font-size: 1.4em;
-    color: #000000;
-    background-color: #fff3cd;
+    color: #000000; /* Changed to black for result text */
+    background-color: #e0f2f7; /* Light background for the result display box */
     padding: 10px;
     border-radius: 5px;
     display: inline-block;
@@ -165,14 +163,14 @@ button:hover {
 }
 
 .explanation-display {
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Light background for explanation */
     padding: 20px;
     border-radius: 8px;
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
     word-wrap: break-word; /* Break long words */
     font-family: 'Consolas', 'Courier New', monospace;
     font-size: 0.95em;
-    color: #444;
+    color: #444; /* Dark gray for explanation text */
     border: 1px solid #e2e6ea;
 }
 
@@ -184,7 +182,7 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Dimmed background */
+    background-color: rgba(0, 0, 0, 0.7); /* Dimmed background - unchanged */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -200,7 +198,7 @@ button:hover {
 }
 
 .overlay-content {
-    background-color: white;
+    background-color: white; /* Overlay content background set to white */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -212,7 +210,7 @@ button:hover {
 }
 
 .overlay-content h2, .overlay-content h3 {
-    color: #007bff;
+    color: #87ceeb; /* Changed to light blue */
     margin-bottom: 15px;
 }
 
@@ -228,12 +226,12 @@ button:hover {
 }
 
 .overlay-content pre {
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; /* Light gray for code blocks */
     padding: 15px;
     border-radius: 5px;
     overflow-x: auto; /* Allow horizontal scrolling for wide code blocks */
     font-size: 0.85em;
-    color: #333;
+    color: #333; /* Dark gray for code text */
 }
 
 .overlay-content code {
@@ -268,7 +266,7 @@ button:hover {
     right: 20px;
     width: 350px;
     max-height: 500px; /* Maximum height */
-    background-color: white;
+    background-color: white; /* Chat box background set to white */
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -293,9 +291,8 @@ button:hover {
     visibility: visible;
 }
 
-
 .chat-header {
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; /* Light gray for chat header */
     padding: 10px 15px;
     border-bottom: 1px solid #ddd;
     display: flex;
@@ -306,7 +303,7 @@ button:hover {
 .chat-header h3 {
     margin: 0;
     font-size: 1.1em;
-    color: #333;
+    color: #333; /* Dark gray for chat header text */
 }
 
 /* Re-using .close-button for chat box */
@@ -353,7 +350,7 @@ button:hover {
 
 .stars .star.selected,
 .stars .star.hovered {
-    color: #ffc107; /* Selected or hovered star color (yellow/gold) */
+    color: #87ceeb; /* Changed to light blue for selected/hovered stars */
 }
 
 #commentText {
@@ -367,7 +364,7 @@ button:hover {
 }
 
 #submitCommentBtn {
-    background-color: #2ca8dc; /* Green for submit */
+    background-color: #87ceeb; /* Changed to light blue for submit button */
     color: white;
     border: none;
     padding: 10px 15px;
@@ -380,14 +377,14 @@ button:hover {
 }
 
 #submitCommentBtn:hover {
-    background-color: #31bdd6;
+    background-color: #6aadda; /* Darker shade of light blue on hover */
 }
 
 #commentSection {
     border: 1px solid #eee;
     padding: 10px;
     border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: #f9f9f9; /* Light gray for comment section background */
     max-height: 150px; /* Limit height for comment display area */
     overflow-y: auto;
     margin-bottom: 10px;
@@ -405,10 +402,10 @@ button:hover {
     margin-bottom: 0;
 }
 .user-comment strong {
-    color: #007bff;
+    color: #87ceeb; /* Changed to light blue for strong text in comments */
 }
 .user-comment .rating {
-    color: #ffc107;
+    color: #87ceeb; /* Changed to light blue for rating stars in comments */
 }
 
 #chatStatusMessage {
@@ -452,13 +449,13 @@ button:hover {
 }
 
 .tab-button.active {
-    border-bottom: 3px solid #007bff;
-    color: #007bff;
+    border-bottom: 3px solid #87ceeb; /* Changed to light blue */
+    color: #87ceeb; /* Changed to light blue */
 }
 
 .tab-button:hover:not(.active) {
     background-color: #f5f5f5;
-    color: #007bff;
+    color: #87ceeb; /* Changed to light blue */
 }
 
 .auth-form {
@@ -474,7 +471,7 @@ button:hover {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #333;
+    color: #333; /* Dark gray for form labels */
     font-size: 0.95em;
 }
 
@@ -493,15 +490,111 @@ button:hover {
 .form-group input[type="text"]:focus,
 .form-group input[type="password"]:focus,
 .form-group input[type="email"]:focus {
-    border-color: #007bff;
+    border-color: #87ceeb; /* Changed to light blue */
     outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+    box-shadow: 0 0 0 2px rgba(135, 206, 235, 0.2); /* Light blue shadow */
 }
 
 .auth-form button[type="submit"] {
-    background-color: #007bff;
+    background-color: #87ceeb; /* Changed to light blue for auth submit button */
     color: white;
     border: none;
     padding: 12px 25px;
     border-radius: 6px;
     cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-form button[type="submit"]:hover {
+    background-color: #6aadda; /* Darker shade of light blue on hover */
+    transform: translateY(-1px);
+}
+
+#authMessage {
+    color: red; /* Error messages remain red for visibility */
+    margin-top: 15px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .navbar-right {
+        flex-wrap: wrap; /* Allow buttons to wrap to next line */
+        justify-content: center; /* Center buttons when wrapped */
+        width: 100%;
+        margin-top: 10px; /* Add space between left and right sections */
+    }
+    .nav-button {
+        flex-grow: 1; /* Allow buttons to grow and fill space */
+        margin: 5px; /* Adjust margin for wrapped buttons */
+        min-width: 120px; /* Ensure buttons don't get too small */
+    }
+    #settingsButton {
+        padding: 8px 12px; /* Keep consistent padding for icon button */
+    }
+    .content-wrapper {
+        padding: 20px 10px;
+        margin-top: 10px;
+    }
+    .container {
+        padding: 25px 20px;
+        box-shadow: none;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    input[type="text"],
+    button {
+        font-size: 1em;
+        padding: 10px;
+    }
+
+    .result-display {
+        font-size: 1.2em;
+    }
+
+    .explanation-display {
+        font-size: 0.9em;
+        padding: 15px;
+    }
+
+    .overlay-content {
+        max-width: 95%; /* Wider on mobile */
+        padding: 20px;
+    }
+
+    /* Chat box adjustments for mobile */
+    #chatBoxContainer {
+        width: 90%;
+        bottom: 10px;
+        right: 5%;
+        left: 5%; /* Center horizontally */
+        max-height: 70vh; /* Adjust max height for smaller screens */
+    }
+
+    /* Auth modal adjustments for mobile */
+    #authModal .overlay-content {
+        width: 95%;
+        padding: 20px 25px;
+    }
+    .tab-button {
+        font-size: 0.95em;
+        padding: 10px 0;
+    }
+    .form-group label,
+    .form-group input,
+    .auth-form button {
+        font-size: 0.95em;
+    }
+}
