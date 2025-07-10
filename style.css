@@ -40,192 +40,166 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent button text from wrapping */
 }
 
 .nav-button:hover {
-    background-color: #6aadda; /* Darker shade of light blue on hover */
-    transform: translateY(-1px);
+    background-color: #64b5f6; /* Slightly darker blue on hover */
 }
 
-/* Specific style for the settings icon button */
-#settingsButton {
-    padding: 8px 12px;
+.navbar-right .nav-button i {
+    margin-right: 5px; /* Space between icon and text */
 }
 
-/* User Profile in Navbar */
+/* User Profile Info in Navbar */
 #userProfileInfo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    cursor: pointer; /* Indicates it's clickable */
+    gap: 8px;
     padding: 5px 10px;
+    background-color: #555;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    transition: background-color 0.2s ease;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 #userProfileInfo:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: #777;
 }
 
 #profilePicture {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: #eee; /* Placeholder background */
     border: 2px solid white;
     object-fit: cover;
-    display: block; /* Ensures it behaves like an image */
 }
 
 #userName {
-    color: white;
     font-weight: bold;
-    font-size: 1em;
+    color: white;
 }
 
 
-/* MAIN CONTENT WRAPPER */
+/* MAIN CONTENT AREA */
 .content-wrapper {
-    flex-grow: 1;
+    flex-grow: 1; /* Allows content to take up available space */
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding: 40px 20px;
+    align-items: flex-start; /* Align content to the top */
+    padding: 20px;
     box-sizing: border-box;
-    margin-top: 20px;
 }
 
-/* MAIN CONTAINER STYLES */
 .container {
-    background-color: #ffffff;
-    padding: 35px 45px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 100%;
-    max-width: 700px;
-    box-sizing: border-box;
+    max-width: 800px;
+    margin-top: 20px; /* Space from navbar */
 }
 
 h1 {
-    color: #87ceeb;
+    color: #333;
     margin-bottom: 15px;
-    font-size: 2.2em;
+    font-size: 2.5em;
 }
 
 p {
-    color: #555;
+    color: #666;
     line-height: 1.6;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .input-section {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    justify-content: center;
+    gap: 10px;
     margin-bottom: 30px;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
-textarea { /* Added textarea here */
-    width: 100%;
+#mathExpressionInput {
+    flex-grow: 1;
     padding: 12px 15px;
-    border: 2px solid #a0d9e7;
-    border-radius: 6px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 1.1em;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    max-width: 400px; /* Limit input width */
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-    border-color: #87ceeb;
-    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.25);
-    outline: none;
-}
-
-button {
-    background-color: #87ceeb;
+#solveButton {
+    background-color: #28a745; /* Green */
     color: white;
     padding: 12px 25px;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #6aadda;
-    transform: translateY(-2px);
+#solveButton:hover {
+    background-color: #218838; /* Darker green on hover */
 }
 
 #resultsSection {
-    margin-top: 35px;
-    border-top: 1px dashed #f3efef;
-    padding-top: 30px;
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
     text-align: left;
 }
 
-#resultsSection h2 {
-    color: #87ceeb;
-    margin-bottom: 15px;
-    font-size: 1.8em;
-}
-
-#resultsSection h3 {
+#resultsSection h2, #resultsSection h3 {
     color: #333;
-    margin-top: 25px;
     margin-bottom: 10px;
-    font-size: 1.4em;
 }
 
 .result-display {
-    font-weight: bold;
-    font-size: 1.4em;
-    color: #000000;
-    background-color: #e0f2f7;
-    padding: 10px;
+    background-color: #e9ecef;
+    padding: 15px;
+    border-left: 5px solid #007bff; /* Blue accent */
     border-radius: 5px;
-    display: inline-block;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #0056b3;
+    word-wrap: break-word; /* Ensure long results wrap */
 }
 
 .explanation-display {
     background-color: #f8f9fa;
     padding: 20px;
-    border-radius: 8px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    font-family: 'Consolas', 'Courier New', monospace;
-    font-size: 0.95em;
-    color: #444;
-    border: 1px solid #e2e6ea;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap; /* Preserves whitespace and wraps long lines */
+    text-align: left;
+    font-size: 1em;
+    color: #495057;
+    overflow-x: auto; /* Enable horizontal scroll for very long lines if needed */
 }
 
-/* OVERLAY/MODAL STYLES (for Versions and Instructions sections) */
-/* These still use the smaller overlay style */
+.hidden {
+    display: none;
+}
+
+/* OVERLAY STYLES (for versions, instructions, settings) */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
+    z-index: 2000; /* Above everything else */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -238,54 +212,47 @@ button:hover {
 
 .overlay-content {
     background-color: white;
-    padding: 30px;
+    padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    max-width: 80%;
-    max-height: 80%;
-    overflow-y: auto;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 90%;
     position: relative;
-    text-align: left;
+    text-align: left; /* Content inside should be left-aligned */
+    max-height: 80vh; /* Limit height */
+    overflow-y: auto; /* Enable scrolling for long content */
 }
 
-.overlay-content h2, .overlay-content h3 {
-    color: #87ceeb;
-    margin-bottom: 15px;
+.overlay-content h2 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #87ceeb;
+    padding-bottom: 10px;
 }
 
 .overlay-content ul {
     list-style-type: disc;
-    margin-left: 20px;
+    padding-left: 20px;
     margin-bottom: 20px;
 }
 
-.overlay-content li {
-    margin-bottom: 8px;
-    line-height: 1.5;
+.overlay-content ul li {
+    margin-bottom: 10px;
+    color: #555;
 }
 
-.overlay-content pre {
-    background-color: #f0f0f0;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto;
-    font-size: 0.85em;
-    color: #333;
-    border: 1px solid #e2e6ea;
-}
-
-.overlay-content code {
-    font-family: 'Consolas', 'Courier New', monospace;
+.overlay-content p, .overlay-content li {
+    font-size: 1em;
 }
 
 .close-button {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 15px;
+    right: 20px;
     font-size: 2em;
-    font-weight: bold;
-    color: #aaa;
     cursor: pointer;
+    color: #666;
     transition: color 0.2s ease;
 }
 
@@ -293,377 +260,321 @@ button:hover {
     color: #333;
 }
 
-.hidden {
-    display: none !important; /* Use !important to ensure hiding */
-}
-
-
-/* --- Chat Box Styles (re-using .overlay and .overlay-content principles) --- */
+/* CHAT BOX STYLES */
 #chatBoxContainer {
     position: fixed;
     bottom: 20px;
     right: 20px;
     width: 350px;
-    max-height: 500px;
     background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    z-index: 1000;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1500;
     display: flex;
     flex-direction: column;
+    max-height: 500px; /* Max height for chat box */
+    overflow: hidden; /* Hide overflow until scroll is needed */
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-#chatBoxContainer.hidden {
-    display: flex; /* Keep it flex, but hide with opacity/visibility */
-    opacity: 0;
-    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
 }
 
 #chatBoxContainer.visible {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
 }
 
 .chat-header {
-    background-color: #f0f0f0;
-    padding: 10px 15px;
-    border-bottom: 1px solid #ddd;
+    background-color: #87ceeb;
+    color: white;
+    padding: 12px 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.chat-header h3 {
-    margin: 0;
     font-size: 1.1em;
-    color: #333;
+    font-weight: bold;
 }
 
 .chat-header .close-btn {
-    position: static;
+    background: none;
+    border: none;
+    color: white;
     font-size: 1.5em;
-    font-weight: bold;
-    color: #888;
     cursor: pointer;
-    transition: color 0.2s ease;
-}
-
-.chat-header .close-btn:hover {
-    color: #555;
+    padding: 0 5px;
 }
 
 .chat-content {
-    padding: 15px;
     flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto; /* Enable scrolling for comments */
+}
+
+#commentSection {
+    margin-bottom: 15px;
+    max-height: 200px; /* Max height for displaying comments */
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.user-comment {
+    background-color: #eef;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: #333;
+    line-height: 1.4;
+}
+
+.user-comment strong {
+    color: #007bff; /* Blue for username */
+}
+
+.user-comment .rating {
+    color: gold;
+    margin-left: 5px;
 }
 
 #commentForm {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: auto;
 }
 
 .rating-section {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 5px; /* Added some margin */
+    margin-bottom: 5px;
 }
 
 .stars .star {
-    font-size: 24px;
-    color: #ccc;
+    font-size: 1.5em;
+    color: #ccc; /* Grey for unselected stars */
     cursor: pointer;
     transition: color 0.2s ease;
 }
 
 .stars .star.selected,
 .stars .star.hovered {
-    color: #87ceeb;
+    color: gold; /* Gold for selected/hovered stars */
 }
 
 #commentText {
-    width: calc(100% - 18px);
-    padding: 8px;
+    width: calc(100% - 20px);
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-    font-family: inherit;
+    border-radius: 5px;
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 60px;
     font-size: 0.95em;
 }
 
 #submitCommentBtn {
-    background-color: #87ceeb;
+    background-color: #007bff; /* Blue */
     color: white;
-    border: none;
     padding: 10px 15px;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
-    font-weight: bold;
     transition: background-color 0.3s ease;
-    width: 100%;
 }
 
 #submitCommentBtn:hover {
-    background-color: #6aadda;
-}
-
-#commentSection {
-    border: 1px solid #eee;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    max-height: 150px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-    color: #444;
-    font-size: 0.9em;
-}
-
-.user-comment {
-    border-bottom: 1px dashed #ddd;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
-}
-.user-comment:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-.user-comment strong {
-    color: #87ceeb;
-}
-.user-comment .rating {
-    color: #87ceeb;
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 #chatStatusMessage {
-    text-align: center;
-    margin-bottom: 10px;
-    font-style: italic;
-    color: #666;
     font-size: 0.9em;
+    color: green;
+    text-align: center;
+    margin-top: -5px;
+    margin-bottom: 10px;
 }
 
 
-/* --- Auth Modal (Login/Signup) Full Screen Styles --- */
-#authModal.modal { /* Target with .modal to override .overlay properties */
+/* AUTH MODAL STYLES (Full-screen overlay) */
+.modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Slightly darker overlay for full screen */
+    background-color: rgba(0, 0, 0, 0.8); /* Even darker background for auth modal */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 3000; /* Higher z-index to ensure it's on top of everything */
+    z-index: 3000; /* Highest z-index */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-#authModal.modal.visible {
+.modal.visible {
     opacity: 1;
     visibility: visible;
 }
 
-#authModal .modal-content {
-    background-color: #ffffff;
-    padding: 40px; /* Increased padding */
-    border-radius: 15px; /* More rounded corners */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    max-width: 450px; /* Wider than before, but still compact */
-    width: 90%; /* Responsive width */
-    max-height: 90vh; /* Max height to prevent overflow on small screens */
-    overflow-y: auto; /* Allow scrolling if content is too long */
+.modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    max-width: 450px; /* Wider for auth form */
+    width: 90%;
     position: relative;
     text-align: center;
-    display: flex; /* Use flex to align content vertically */
-    flex-direction: column;
-    align-items: center; /* Center horizontally */
 }
 
-#authModal .close-button {
-    top: 15px;
-    right: 20px;
-    font-size: 2.5em; /* Larger close button */
-    color: #666;
-}
-
-#authModal h2 {
+.modal-content h2 {
     color: #333;
-    margin-bottom: 20px;
+    margin-top: 0;
+    margin-bottom: 25px;
     font-size: 2em;
+}
+
+.modal-content .close-button {
+    font-size: 2.5em;
 }
 
 .tabs {
     display: flex;
-    justify-content: center;
-    width: 100%; /* Tabs take full width */
-    margin-bottom: 30px; /* More space below tabs */
-    border-bottom: 1px solid #eee; /* Subtle separator */
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
 }
 
 .tab-button {
-    flex: 1; /* Allow tabs to grow and fill space */
-    padding: 12px 0; /* Adjusted padding */
+    flex: 1;
+    padding: 15px 0;
+    background: none;
     border: none;
-    border-bottom: 3px solid transparent; /* Highlight active tab with bottom border */
-    background-color: transparent;
-    cursor: pointer;
     font-size: 1.1em;
-    font-weight: 600;
-    color: #777;
-    transition: all 0.3s ease;
-    text-align: center;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 3px solid transparent;
 }
 
 .tab-button.active {
-    color: #87ceeb; /* Light blue for active tab */
-    border-bottom-color: #87ceeb; /* Active tab underline */
-    background-color: #f0f8ff; /* Very light blue background for active tab */
-}
-
-.tab-button:hover:not(.active) {
-    color: #333;
-    background-color: #f9f9f9;
+    color: #007bff;
+    border-bottom-color: #007bff;
+    font-weight: bold;
 }
 
 .auth-form {
-    width: 100%;
-    display: flex; /* Make form a flex container */
-    flex-direction: column; /* Stack form groups */
-    gap: 15px; /* Space between form groups */
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
 .auth-form h3 {
-    color: #333;
+    margin-top: 0;
     margin-bottom: 20px;
-    font-size: 1.6em;
-    text-align: center; /* Center form heading */
+    color: #333;
+    font-size: 1.5em;
 }
 
 .form-group {
-    position: relative; /* For icon positioning */
-    margin-bottom: 0; /* Remove default margin as flex gap handles it */
-    text-align: left; /* Align labels */
+    text-align: left;
+    position: relative;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 600;
-    color: #333;
-    font-size: 0.95em;
+    color: #555;
+    font-weight: bold;
 }
 
 .form-group input {
-    width: calc(100% - 40px); /* Adjust width for icon padding */
+    width: calc(100% - 40px); /* Account for padding and icon */
     padding: 12px 15px 12px 40px; /* Left padding for icon */
-    border: 1px solid #ddd;
-    border-radius: 8px; /* More rounded inputs */
+    border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 1em;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background-color: #fcfcfc; /* Slightly off-white background */
 }
 
-.form-group input:focus {
-    border-color: #87ceeb;
-    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.15);
-    outline: none;
-}
-
-.form-group .fa-solid, .form-group .fa-regular { /* Icons for input fields */
+.form-group i {
     position: absolute;
     left: 15px;
     top: 50%;
-    transform: translateY(calc(-50% + 4px)); /* Adjust for label height */
+    transform: translateY(calc(50% + 5px)); /* Adjust vertical position */
     color: #888;
-    font-size: 1em;
-    pointer-events: none; /* Make sure icon doesn't block input clicks */
 }
 
-.form-group .password-toggle-icon { /* Eye icon for password */
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(calc(-50% + 4px)); /* Adjust for label height */
-    color: #888;
-    cursor: pointer;
-    font-size: 1em;
-    transition: color 0.2s ease;
+.form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
-.form-group .password-toggle-icon:hover {
-    color: #555;
+
+.auth-form button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.auth-form button[type="submit"]:hover {
+    background-color: #0056b3;
 }
 
 .checkbox-group {
     display: flex;
-    align-items: flex-start; /* Align checkbox to top of text */
+    align-items: center;
     gap: 8px;
-    margin-top: 15px;
-    margin-bottom: 20px; /* Space before button */
+    margin-bottom: 15px;
     font-size: 0.9em;
     color: #555;
 }
 
-.checkbox-group input[type="checkbox"] {
-    margin-top: 4px; /* Align checkbox vertically with text */
-    width: auto; /* Reset width for checkbox */
-    accent-color: #87ceeb; /* Blue checkbox */
-    cursor: pointer;
-}
-
 .checkbox-group a {
-    color: #87ceeb;
+    color: #007bff;
     text-decoration: none;
-    font-weight: 500;
-    transition: text-decoration 0.2s ease;
 }
 
 .checkbox-group a:hover {
     text-decoration: underline;
 }
 
-.auth-form button[type="submit"] {
-    background-color: #87ceeb;
-    color: white;
-    padding: 15px 25px; /* Larger button */
-    border-radius: 8px; /* More rounded button */
-    font-size: 1.15em; /* Larger font */
-    margin-top: 10px;
-    box-shadow: 0 4px 10px rgba(135, 206, 235, 0.2); /* Subtle shadow */
+/* Password Toggle Eye Icon */
+.password-toggle-icon {
+    right: 15px; /* Position it on the right side of the input */
+    left: auto; /* Override left positioning */
+    cursor: pointer;
+    transform: translateY(calc(50% + 5px)) !important; /* Re-adjust vertical position */
+    z-index: 10; /* Ensure it's above the input */
 }
 
-.auth-form button[type="submit"]:hover {
-    background-color: #6aadda;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(135, 206, 235, 0.3);
-}
 
 .separator {
     display: flex;
     align-items: center;
     text-align: center;
-    margin: 25px 0; /* Space above and below separator */
-    width: 100%;
+    margin: 20px 0;
+    color: #aaa;
 }
 
 .separator::before,
 .separator::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
 }
 
 .separator:not(:empty)::before {
@@ -674,63 +585,33 @@ button:hover {
     margin-left: .25em;
 }
 
-.separator span {
-    padding: 0 10px;
-    color: #888;
-    font-size: 0.9em;
-}
-
 .switch-auth-mode {
-    font-size: 0.95em;
+    font-size: 0.9em;
     color: #555;
-    margin-bottom: 15px; /* Space below this link */
+    margin-top: 10px;
 }
 
 .switch-auth-mode a {
-    color: #87ceeb;
+    color: #007bff;
     text-decoration: none;
     font-weight: bold;
-    transition: text-decoration 0.2s ease;
 }
 
 .switch-auth-mode a:hover {
     text-decoration: underline;
 }
 
-#authMessage {
-    color: red;
-    margin-top: 15px;
-    font-size: 0.9em;
-    text-align: center;
-}
-
-/* Responsive adjustments for smaller screens */
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        padding: 10px;
+        gap: 10px;
     }
+
     .navbar-right {
-        flex-wrap: wrap;
         justify-content: center;
         width: 100%;
-        margin-top: 10px;
-    }
-    .nav-button {
-        flex-grow: 1;
-        margin: 5px;
-        min-width: 100px;
-    }
-    #settingsButton {
-        padding: 8px 12px;
-    }
-    .content-wrapper {
-        padding: 20px 10px;
-        margin-top: 10px;
-    }
-    .container {
-        padding: 25px 20px;
-        box-shadow: none;
+        flex-wrap: wrap; /* Allow buttons to wrap */
     }
 
     h1 {
@@ -782,25 +663,17 @@ button:hover {
         padding: 10px 0;
     }
     .auth-form h3 {
-        font-size: 1.4em;
+        font-size: 1.3em;
     }
     .form-group input {
-        font-size: 0.95em;
-        padding: 10px 15px 10px 35px; /* Adjust padding for smaller icons */
+        width: calc(100% - 30px); /* Adjust for smaller screens */
+        padding: 10px 15px 10px 30px;
     }
-    .form-group .fa-solid, .form-group .fa-regular {
+    .form-group i {
         left: 10px;
-        font-size: 0.9em;
+        transform: translateY(calc(50% + 2px)); /* Adjust icon position */
     }
-    .form-group .password-toggle-icon {
+    .password-toggle-icon {
         right: 10px;
-        font-size: 0.9em;
-    }
-    .auth-form button[type="submit"] {
-        padding: 12px 20px;
-        font-size: 1em;
-    }
-    .checkbox-group, .separator span, .switch-auth-mode {
-        font-size: 0.85em;
     }
 }
