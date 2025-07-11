@@ -4,7 +4,7 @@ import re
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app) # Enable CORS for all routes, allowing frontend to access backend
+CORS(app)
 
 class CustomRootPrinter(sympy.Printer):
     """
