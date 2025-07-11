@@ -282,13 +282,22 @@ signupForm.addEventListener('submit', (e) => {
 });
 
 
-// --- Main Tool Logic (Now correctly calls the Flask backend) ---
 solveButton.addEventListener('click', async () => {
     const expression = mainInput.value.trim();
+    const resultText = document.getElementById('resultText'); 
+    const explanationText = document.getElementById('explanationText'); 
+    const resultsSection = document.getElementById('resultsSection');
+    resultText.textContent = '';
+    explanationText.textContent = '';
+    resultsSection.classList.add('hidden');
     if (expression) {
+        resultText.textContent = 'Processing...';
+        explanationText.textContent = 'Giving request to host...';
+        resultsSection.classList.remove('hidden');
+        solveButton.disabled = true;
+
         try {
-            // Send the expression to the Flask backend
-            const response = await fetch('http://127.0.0.1:5000/solve', { // Adjust URL if your Flask server runs on a different address/port
+            const response = await fetch('http://127.0.0.1:5000/solve', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -298,28 +307,27 @@ solveButton.addEventListener('click', async () => {
 
             const data = await response.json();
 
-            if (response.ok) { // Check if the response status is 2xx (success)
+            if (response.ok) { // Kiểm tra nếu status phản hồi là 2xx (thành công)
                 resultText.textContent = data.result;
                 explanationText.textContent = data.explanation;
-                resultsSection.classList.remove('hidden');
-            } else { // Handle errors from the backend (e.g., 400 Bad Request)
-                resultText.textContent = `Error: ${data.message || 'An unknown error occurred'}`;
-                explanationText.textContent = data.explanation || 'Please check your input and try again.';
-                resultsSection.classList.remove('hidden');
+                // resultsSection.classList.remove('hidden'); // Đã hiển thị ở bước loading
+            } else { // Xử lý lỗi từ backend (ví dụ: 400 Bad Request)
+                resultText.textContent = `Error: ${data.message || 'Unexpected error happended'}`;
+                explanationText.textContent = data.explanation || 'Please check again the input and try again.';
             }
         } catch (error) {
-            // Handle network errors or issues with the fetch request itself
-            resultText.textContent = 'Connection Error!';
-            explanationText.textContent = `Could not connect to the math solving server. Please ensure the backend (app.py) is running. Details: ${error.message}`;
+            resultText.textContent = 'Connection error!';
+            explanationText.textContent = `Can't connect to math solving server. Please check again. More specificly: ${error.message}`;
             resultsSection.classList.remove('hidden');
+        } finally {
+            solveButton.disabled = false;
         }
     } else {
-        resultText.textContent = 'Please enter a math expression or equation!';
+        resultText.textContent = 'Please enter an expression or an equation!';
         explanationText.textContent = '';
-        resultsSection.classList.add('hidden'); // Hide if no input
+        resultsSection.classList.remove('hidden');
     }
 });
-
 
 // --- Chat Box Logic ---
 
@@ -366,7 +374,6 @@ starsRatingContainer.addEventListener('mouseover', function(e) {
         highlightStars(parseInt(e.target.dataset.value));
     }
 });
-
 starsRatingContainer.addEventListener('mouseout', function() {
     highlightStars(currentRating); // Revert to selected rating
 });
