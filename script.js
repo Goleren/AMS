@@ -263,4 +263,158 @@ signupForm.addEventListener('submit', (e) => {
         authMessage.style.color = 'red';
         return;
     }
-    if (!
+    if (!termsCheckbox || !termsCheckbox.checked) { // Check if checkbox exists and is checked
+        authMessage.textContent = 'You must agree to the Terms of Service and Privacy Policy.';
+        authMessage.style.color = 'red';
+        return;
+    }
+
+    // Simulate successful registration
+    authMessage.textContent = 'Registration successful! You can now log in.';
+    authMessage.style.color = 'green';
+    // In a real application, you would send this data to your backend
+    // and then probably redirect to login or log the user in directly.
+    setTimeout(() => {
+        activateTab('login'); // Switch to login tab after successful registration
+        signupForm.reset(); // Clear form fields
+        authMessage.textContent = ''; // Clear message
+    }, 1500);
+});
+
+
+// --- Main Tool Logic (Now correctly calls the Flask backend) ---
+solveButton.addEventListener('click', async () => {
+    const expression = mainInput.value.trim();
+    if (expression) {
+        try {
+            // Send the expression to the Flask backend
+            const response = await fetch('http://127.0.0.1:5000/solve', { // Adjust URL if your Flask server runs on a different address/port
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ expression: expression }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) { // Check if the response status is 2xx (success)
+                resultText.textContent = data.result;
+                explanationText.textContent = data.explanation;
+                resultsSection.classList.remove('hidden');
+            } else { // Handle errors from the backend (e.g., 400 Bad Request)
+                resultText.textContent = `Error: ${data.message || 'An unknown error occurred'}`;
+                explanationText.textContent = data.explanation || 'Please check your input and try again.';
+                resultsSection.classList.remove('hidden');
+            }
+        } catch (error) {
+            // Handle network errors or issues with the fetch request itself
+            resultText.textContent = 'Connection Error!';
+            explanationText.textContent = `Could not connect to the math solving server. Please ensure the backend (app.py) is running. Details: ${error.message}`;
+            resultsSection.classList.remove('hidden');
+        }
+    } else {
+        resultText.textContent = 'Please enter a math expression or equation!';
+        explanationText.textContent = '';
+        resultsSection.classList.add('hidden'); // Hide if no input
+    }
+});
+
+
+// --- Chat Box Logic ---
+
+const starsRatingContainer = document.getElementById('starsRating');
+const commentText = document.getElementById('commentText');
+const submitCommentBtn = document.getElementById('submitCommentBtn');
+const commentSection = document.getElementById('commentSection');
+const chatStatusMessage = document.getElementById('chatStatusMessage');
+let currentRating = 0; // Current selected rating
+
+// Initial messages for chat box
+const initialComments = [
+    { user: 'User A', rating: 5, comment: 'This tool is amazing for complex equations!' },
+    { user: 'User B', rating: 3, comment: 'Good start, but could use more features for calculus.' }
+];
+
+function displayComments() {
+    commentSection.innerHTML = ''; // Clear existing comments
+    initialComments.forEach(c => {
+        const newCommentDiv = document.createElement('p');
+        let ratingStars = '';
+        for (let i = 0; i < c.rating; i++) {
+            ratingStars += '★'; // Filled star
+        }
+        for (let i = c.rating; i < 5; i++) {
+            ratingStars += '☆'; // Empty star
+        }
+        newCommentDiv.className = 'user-comment';
+        newCommentDiv.innerHTML = `<strong>${c.user}:</strong> <span class="rating">${ratingStars}</span> ${c.comment}`;
+        commentSection.appendChild(newCommentDiv);
+    });
+}
+displayComments(); // Call on load
+
+starsRatingContainer.addEventListener('click', function(e) {
+    if (e.target.classList.contains('star')) {
+        currentRating = parseInt(e.target.dataset.value);
+        updateStarsDisplay(currentRating);
+    }
+});
+
+starsRatingContainer.addEventListener('mouseover', function(e) {
+    if (e.target.classList.contains('star')) {
+        highlightStars(parseInt(e.target.dataset.value));
+    }
+});
+
+starsRatingContainer.addEventListener('mouseout', function() {
+    highlightStars(currentRating); // Revert to selected rating
+});
+
+function updateStarsDisplay(rating) {
+    Array.from(starsRatingContainer.children).forEach(star => {
+        if (parseInt(star.dataset.value) <= rating) {
+            star.classList.add('selected');
+        } else {
+            star.classList.remove('selected');
+        }
+    });
+}
+
+function highlightStars(rating) {
+    Array.from(starsRatingContainer.children).forEach(star => {
+        if (parseInt(star.dataset.value) <= rating) {
+            star.classList.add('hovered');
+        } else {
+            star.classList.remove('hovered');
+        }
+    });
+}
+
+// Initialize star display on page load
+updateStarsDisplay(currentRating);
+
+submitCommentBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const comment = commentText.value.trim();
+    if (comment || currentRating > 0) {
+        // In a real app, you'd send this to a backend
+        // For simulation, just add to the display
+        const newUser = isLoggedIn ? (userName.textContent || 'Logged-in User') : 'Anonymous User';
+        
+        initialComments.unshift({ // Add to the beginning of the array
+            user: newUser,
+            rating: currentRating,
+            comment: comment
+        });
+        displayComments(); // Re-render comments
+
+        commentText.value = '';
+        currentRating = 0;
+        updateStarsDisplay(currentRating);
+        chatStatusMessage.textContent = 'Thank you for your feedback!';
+    } else {
+        chatStatusMessage.textContent = 'Please enter a comment or select a rating!';
+    }
+});
