@@ -1,8 +1,7 @@
-/* style.css */
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5; /* Light gray background */
+    font-family: century;
+    background-color: #f0f2f5; 
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -11,9 +10,9 @@ body {
     box-sizing: border-box;
 }
 
-/* HEADER BAR STYLES */
+
 .navbar {
-    background-color: #333; /* Dark background */
+    background-color: #333;
     color: white;
     padding: 10px 20px;
     display: flex;
@@ -34,7 +33,7 @@ body {
 }
 
 .nav-button {
-    background-color: #87ceeb; /* Light blue for buttons */
+    background-color: #87ceeb; 
     color: white;
     padding: 8px 15px;
     border: none;
@@ -42,18 +41,18 @@ body {
     cursor: pointer;
     font-size: 0.9em;
     transition: background-color 0.3s ease;
-    white-space: nowrap; /* Prevent button text from wrapping */
+    white-space: nowrap; 
 }
 
 .nav-button:hover {
-    background-color: #64b5f6; /* Slightly darker blue on hover */
+    background-color: #64b5f6; 
 }
 
 .navbar-right .nav-button i {
-    margin-right: 5px; /* Space between icon and text */
+    margin-right: 5px; 
 }
 
-/* User Profile Info in Navbar */
+
 #userProfileInfo {
     display: flex;
     align-items: center;
@@ -81,14 +80,11 @@ body {
     font-weight: bold;
     color: white;
 }
-
-
-/* MAIN CONTENT AREA */
 .content-wrapper {
-    flex-grow: 1; /* Allows content to take up available space */
+    flex-grow: 1;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align content to the top */
+    align-items: flex-start;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -101,7 +97,7 @@ body {
     text-align: center;
     width: 100%;
     max-width: 800px;
-    margin-top: 20px; /* Space from navbar */
+    margin-top: 20px; 
 }
 
 h1 {
@@ -129,11 +125,11 @@ p {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1.1em;
-    max-width: 400px; /* Limit input width */
+    max-width: 400px; 
 }
 
 #solveButton {
-    background-color: #28a745; /* Green */
+    background-color: #28a745;
     color: white;
     padding: 12px 25px;
     border: none;
@@ -144,7 +140,7 @@ p {
 }
 
 #solveButton:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838;
 }
 
 #resultsSection {
@@ -162,13 +158,13 @@ p {
 .result-display {
     background-color: #e9ecef;
     padding: 15px;
-    border-left: 5px solid #007bff; /* Blue accent */
+    border-left: 5px solid #007bff; 
     border-radius: 5px;
     margin-bottom: 20px;
     font-size: 1.3em;
     font-weight: bold;
     color: #0056b3;
-    word-wrap: break-word; /* Ensure long results wrap */
+    word-wrap: break-word; 
 }
 
 .explanation-display {
@@ -177,29 +173,28 @@ p {
     border: 1px solid #dee2e6;
     border-radius: 5px;
     font-family: 'Courier New', Courier, monospace;
-    white-space: pre-wrap; /* Preserves whitespace and wraps long lines */
+    white-space: pre-wrap;
     text-align: left;
     font-size: 1em;
     color: #495057;
-    overflow-x: auto; /* Enable horizontal scroll for very long lines if needed */
+    overflow-x: auto;
 }
 
 .hidden {
     display: none;
 }
 
-/* OVERLAY STYLES (for versions, instructions, settings) */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.7); 
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; /* Above everything else */
+    z-index: 2000;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -218,9 +213,9 @@ p {
     max-width: 600px;
     width: 90%;
     position: relative;
-    text-align: left; /* Content inside should be left-aligned */
-    max-height: 80vh; /* Limit height */
-    overflow-y: auto; /* Enable scrolling for long content */
+    text-align: left;
+    max-height: 80vh; 
+    overflow-y: auto; 
 }
 
 .overlay-content h2 {
@@ -260,7 +255,7 @@ p {
     color: #333;
 }
 
-/* CHAT BOX STYLES */
+
 #chatBoxContainer {
     position: fixed;
     bottom: 20px;
@@ -272,8 +267,8 @@ p {
     z-index: 1500;
     display: flex;
     flex-direction: column;
-    max-height: 500px; /* Max height for chat box */
-    overflow: hidden; /* Hide overflow until scroll is needed */
+    max-height: 500px;
+    overflow: hidden;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
@@ -311,12 +306,12 @@ p {
 .chat-content {
     flex-grow: 1;
     padding: 15px;
-    overflow-y: auto; /* Enable scrolling for comments */
+    overflow-y: auto;
 }
 
 #commentSection {
     margin-bottom: 15px;
-    max-height: 200px; /* Max height for displaying comments */
+    max-height: 200px;
     overflow-y: auto;
     border: 1px solid #eee;
     padding: 10px;
@@ -335,7 +330,7 @@ p {
 }
 
 .user-comment strong {
-    color: #007bff; /* Blue for username */
+    color: #007bff;
 }
 
 .user-comment .rating {
@@ -358,14 +353,14 @@ p {
 
 .stars .star {
     font-size: 1.5em;
-    color: #ccc; /* Grey for unselected stars */
+    color: #ccc;
     cursor: pointer;
     transition: color 0.2s ease;
 }
 
 .stars .star.selected,
 .stars .star.hovered {
-    color: gold; /* Gold for selected/hovered stars */
+    color: gold; 
 }
 
 #commentText {
@@ -373,13 +368,13 @@ p {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    resize: vertical; /* Allow vertical resizing */
+    resize: vertical; 
     min-height: 60px;
     font-size: 0.95em;
 }
 
 #submitCommentBtn {
-    background-color: #007bff; /* Blue */
+    background-color: #007bff; 
     color: white;
     padding: 10px 15px;
     border: none;
@@ -390,7 +385,7 @@ p {
 }
 
 #submitCommentBtn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; 
 }
 
 #chatStatusMessage {
@@ -400,20 +395,17 @@ p {
     margin-top: -5px;
     margin-bottom: 10px;
 }
-
-
-/* AUTH MODAL STYLES (Full-screen overlay) */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Even darker background for auth modal */
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 3000; /* Highest z-index */
+    z-index: 3000;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -429,7 +421,7 @@ p {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-    max-width: 450px; /* Wider for auth form */
+    max-width: 450px; 
     width: 90%;
     position: relative;
     text-align: center;
@@ -496,8 +488,8 @@ p {
 }
 
 .form-group input {
-    width: calc(100% - 40px); /* Account for padding and icon */
-    padding: 12px 15px 12px 40px; /* Left padding for icon */
+    width: calc(100% - 40px);
+    padding: 12px 15px 12px 40px; 
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
@@ -507,7 +499,7 @@ p {
     position: absolute;
     left: 15px;
     top: 50%;
-    transform: translateY(calc(50% + 5px)); /* Adjust vertical position */
+    transform: translateY(calc(50% + 5px)); 
     color: #888;
 }
 
@@ -552,13 +544,12 @@ p {
     text-decoration: underline;
 }
 
-/* Password Toggle Eye Icon */
 .password-toggle-icon {
-    right: 15px; /* Position it on the right side of the input */
-    left: auto; /* Override left positioning */
+    right: 15px;
+    left: auto;
     cursor: pointer;
-    transform: translateY(calc(50% + 5px)) !important; /* Re-adjust vertical position */
-    z-index: 10; /* Ensure it's above the input */
+    transform: translateY(calc(50% + 5px)) !important;
+    z-index: 10;
 }
 
 
@@ -601,7 +592,6 @@ p {
     text-decoration: underline;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -611,7 +601,7 @@ p {
     .navbar-right {
         justify-content: center;
         width: 100%;
-        flex-wrap: wrap; /* Allow buttons to wrap */
+        flex-wrap: wrap;
     }
 
     h1 {
@@ -637,8 +627,6 @@ p {
         max-width: 95%;
         padding: 20px;
     }
-
-    /* Chat box adjustments for mobile */
     #chatBoxContainer {
         width: 90%;
         bottom: 10px;
@@ -646,10 +634,8 @@ p {
         left: 5%;
         max-height: 70vh;
     }
-
-    /* Auth modal adjustments for mobile */
     #authModal .modal-content {
-        width: 95%; /* Make it fill more of the screen on mobile */
+        width: 95%;
         padding: 25px 20px;
     }
     #authModal h2 {
@@ -666,12 +652,12 @@ p {
         font-size: 1.3em;
     }
     .form-group input {
-        width: calc(100% - 30px); /* Adjust for smaller screens */
+        width: calc(100% - 30px);
         padding: 10px 15px 10px 30px;
     }
     .form-group i {
         left: 10px;
-        transform: translateY(calc(50% + 2px)); /* Adjust icon position */
+        transform: translateY(calc(50% + 2px)); 
     }
     .password-toggle-icon {
         right: 10px;
