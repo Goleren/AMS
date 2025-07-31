@@ -3,166 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMS - Advanced Math Solving</title>
-        
+    <title>AMS</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="navbar-left">
-            <button id="btnVersions" class="nav-button">AMS 1.2</button>
-        </div>
-        <div class="navbar-right">
-            <button id="settingsButton" class="nav-button">
-                <i class="fas fa-cog"></i>
-            </button>
-            <button id="chatButton" class="nav-button">Chat Box</button>
-            <button id="btnInstructions" class="nav-button">Instructions</button> <div id="userProfileInfo" class="hidden">
-                <img id="profilePicture" src="https://via.placeholder.com/30/87ceeb/FFFFFF?text=P" alt="Profile Picture">
-                <span id="userName">User Name</span>
+    <header>
+        <div class="navbar">
+            <div class="navbar-left">
+                <button id="btnVersions" class="pill-button">Login/Register</button>
+                <button id="btnVersions" class="pill-button">Versions</button>
+                <button id="btnVersions" class="pill-button">Instructions</button>
             </div>
-
-            <button id="authButton" class="nav-button">Log in / Register</button>
+            <div class="navbar-right">
+                <button id="btnVersions" class="pill-button">Settings</button>
+            </div>
         </div>
     </header>
-    <div class="content-wrapper">
-        <div class="container">
-            <h1>Welcome to AMS - Advanced Math Solving</h1> <p>Enter your math expression or equation below and click "Solve Now" to get the result and detailed explanation.</p>
-            
-            <div class="input-section">
-                <input type="text" id="mathExpressionInput" placeholder="Example: 2 * (3 + 4) / 2 or x**2 - 4 = 0">
-                <button id="solveButton">Solve Now</button>
-            </div>
-            
-            <div id="resultsSection" class="hidden">
-                <h2>Results:</h2>
-                <p id="resultText" class="result-display"></p>
-                
-                <h3>Explanation:</h3>
-                <pre id="explanationText" class="explanation-display"></pre>
-            </div>
-        </div>
-    </div>
-
-    <div id="versionsSection" class="overlay hidden">
-        <div class="overlay-content">
-            <span class="close-button" id="closeVersions">&times;</span>
-            <h2>AMS Versions</h2>
-            <ul>
-                <li><strong>AMS 1.0:</strong> Basic arithmetic operations and simple algebraic expression.</li>
-                <li><strong>AMS 1.1:</strong> Adding logo, easier operations for input and output, larger exception for variables, multivariable equations can be solved.</li> <li><strong>AMS 1.2 (Current):</strong> More communication tools for users</li> </ul>
-            <p>Stay tuned for updates!</p>
-        </div>
-    </div>
-
-    <div id="instructionsSection" class="overlay hidden">
-        <div class="overlay-content">
-            <span class="close-button" id="closeInstructions">&times;</span>
-            <h2>How to Use AMS</h2>
-            <p>Welcome to the AMS user guide!</p>
-            <h3>1. Entering Expressions:</h3>
-            <p>You can enter basic arithmetic expressions like: <code>1 + 2 . 3</code>, <code>(10 - 5) / 2</code>.</p>
-            <p>For exponents, use <code>**</code> (e.g., <code>x**2</code> for $x^2$).</p>
-            <h2>2. Operations:</h2> <p>Addition: a+b</p>
-            <p>Subtraction: a-b</p>
-            <p>Multiplication: a.b, 2a, 2*a</p>
-            <p>Division: a/b</p>
-            <p>Powering: a**b</p>
-            <p>Rooting: a#b, b^1/a</p>
-            <h3>3. Entering Equations:</h3>
-            <p>To solve equations, enter the equation with variable <code>x</code>. For example:</p>
-            <ul>
-                <li><code>x + 5 = 10</code></li>
-                <li><code>2*x - 7 = 3*x + 1</code></li>
-                <li><code>x**2 - 4 = 0</code></li>
-                <li><code>sin(x) = 0</code> (supports some basic trigonometric functions)</li>
-            </ul>
-            <h3>4. Viewing Results:</h3>
-            <p>After clicking "Solve Now", the result and a detailed explanation will appear below.</p>
-        </div>
-    </div>
-
-    <div id="chatBoxContainer" class="hidden">
-        <div class="chat-header">
-            <h3>Send Your Review and Comments</h3>
-            <span class="close-btn">&times;</span>
-        </div>
-        <div class="chat-content">
-            <p id="chatStatusMessage"></p>
-            <div id="commentSection">
-                </div>
-            <form id="commentForm">
-                <div class="rating-section">
-                    <label for="rating">Your Rating:</label>
-                    <div class="stars" id="starsRating">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
-                    </div>
-                    <input type="hidden" id="selectedRating" name="rating" value="0">
-                </div>
-                <textarea id="commentText" placeholder="Write your comment here..." rows="4"></textarea>
-                <button type="submit" id="submitCommentBtn">Submit Comment</button>
-            </form>
-        </div>
-    </div>
-
-    <div id="authModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Log in / Register</h2>
-            <div class="tabs">
-                <button class="tab-button active" data-tab="login">Log in</button>
-                <button class="tab-button" data-tab="signup">Register</button>
-            </div>
-
-            <form id="loginForm" class="auth-form">
-                <h3>Log in</h3>
-                <div class="form-group">
-                    <label for="loginUsername">Username:</label>
-                    <input type="text" id="loginUsername" name="username" required placeholder="Enter your username">
-                    <i class="fas fa-user fa-solid"></i> </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password:</label>
-                    <input type="password" id="loginPassword" name="password" required placeholder="Enter your password">
-                    <i class="fas fa-lock fa-solid"></i> <i class="fas fa-eye-slash password-toggle-icon"></i> </div>
-                <button type="submit">Log in</button>
-                <div class="separator"><span>or</span></div>
-                <p class="switch-auth-mode">Don't have an account? <a href="#" id="switchToSignupLink">Register now</a></p> </form>
-
-            <form id="signupForm" class="auth-form hidden">
-                <h3>Register</h3>
-                <div class="form-group">
-                    <label for="signupUsername">Username:</label>
-                    <input type="text" id="signupUsername" name="username" required placeholder="Choose a username">
-                    <i class="fas fa-user fa-solid"></i> </div>
-                <div class="form-group">
-                    <label for="signupEmail">Email:</label>
-                    <input type="email" id="signupEmail" name="email" required placeholder="Enter your email">
-                    <i class="fas fa-envelope fa-solid"></i> </div>
-                <div class="form-group">
-                    <label for="signupPassword">Password:</label>
-                    <input type="password" id="signupPassword" name="password" required placeholder="Create a password">
-                    <i class="fas fa-lock fa-solid"></i> <i class="fas fa-eye-slash password-toggle-icon"></i> </div>
-                <div class="form-group">
-                    <label for="signupConfirmPassword">Confirm Password:</label>
-                    <input type="password" id="signupConfirmPassword" name="confirmPassword" required placeholder="Confirm your password">
-                    <i class="fas fa-lock fa-solid"></i> <i class="fas fa-eye-slash password-toggle-icon"></i> </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="termsCheckbox" required>
-                    <label for="termsCheckbox">I agree to the <a href="#" target="_blank">Terms of Service</a> & <a href="#" target="_blank">Privacy Policy</a></label>
-                </div>
-                <button type="submit">Register</button>
-                <div class="separator"><span>or</span></div>
-                <p class="switch-auth-mode">Already have an account? <a href="#" id="switchToLoginLink">Log in now</a></p> </form>
-
-            <p id="authMessage" style="color: red; margin-top: 10px;"></p>
-        </div>
-    </div>
-    <script src="script.js"></script>
 </body>
 </html>
